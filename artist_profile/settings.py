@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    's3direct',
     'artist',
 ]
 
@@ -119,3 +120,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+AWS_ACCESS_KEY_ID = 'AKIAXO2N67NAKDEYJURU'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'artist-images-bhwong'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_ENDPOINT_URL = 'https://s3.us-east-2.amazonaws.com'
+
+S3DIRECT_DESTINATIONS = {
+    'primary_destination': {
+        'key': 's3://artist-images-bhwong',
+        'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
+    },
+}

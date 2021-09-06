@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('artist.urls'))
+    path('',include('artist.urls')),
+    path('s3direct/', include('s3direct.urls')),
 ]
