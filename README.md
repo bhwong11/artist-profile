@@ -137,15 +137,16 @@ Application is able to send back html response for 6 main pagers (home, blogs, c
 
 Client user is able to create, edit and delete Products, and only the client user will be able to do this - 9/9
 
-Client user is able to create, edit and delete Blogs, and only the client user will be able to do this - 9/10
+Potential customer user is able to register, sign in, create reviews, edit reviews, and delete reviews - 9/10
 
 Client user is able to create, edit and delete Artwork, and only the client user will be able to do this - 9/11
 
-Potential customer user is able to register, sign in, create reviews, edit reviews, and delete reviews - 9/12
+Client user is able to create, edit and delete Blogs, and only the client user will be able to do this - 9/12
 
 All forms will have error handling and display an error if incorrect information is added in displaying an issue and refusing to admit data into database if incorrect - 9/14
 
 Client user is not only able to add product/image artwork via image address but is able to upload on the site with image storage in s3 bucket -9/15
+
 Entire website is styled - 9/16
 
 Potential customer user is able to sort artwork by tags - 9/16(if time allows)
