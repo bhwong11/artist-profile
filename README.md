@@ -1,19 +1,31 @@
 Project: Ransom Bergen Artist Profile
+
 This is an Artist Profile and Art Showcase for writer and graphic design Ransom Bergen with the goal of people to buy his artwork. This will be a server rendered application using the Django Stack with a Postgres Database.
+
 Main features:
+
 Users will be able to view these 6 main pages:
 home page showcasing a featured art piece and navigation to other pages
+
 Artwork Showcase Page where all artwork that the artist will want featured is displayed and categorized but medium(painting, drawing, writing, graphic art)
+
 Commissions page where users can request artwork via sending emails
+
 Buy Artwork Page where users can buy premade art or prints(these would be links to product pages redbubble, a site for art buying)
+
 Each product will have it’s own show page where full details will be display and users can also leave reviews
+
 A contact page containing and email and social media platforms
+
 A blog page containing updates and post from the artist
+
 The Artist will be able to post art/products/blogs, and remove art/products/blogs and edit them as well.
 External users will be able to create an account and create/edit/delete reviews for products
+
 Each artwork, product, and blog can have tags added on to them to categorize them.
 
-User Stories: Who is your user? What features will your app have?
+User Stories:
+
 User: potential customer
 Once the user enters the website( either from link or directly typing url into browser) the user will see a home page featuring the artist name and 3 featured artworks. By the later 2 featured artworks there will be text with a link to the “Buy Artwork” page and the “Commission's” page There will be a navigation bar to the “home page”, “artwork page”, “Commision”, “Buy Artwork”, “blog” and “contact” page.
 When a user enters the artwork page(either from navigation link or directly typing in) the user will see images of artwork divided into categories of medium. Each image will have a title and tags attached below it as well. Users will also see a drop down menu where they can select a tag and see all artworks containing that tag. This page will also contain the navigation bar from the home page.
@@ -39,7 +51,9 @@ On the product page the user will be able to see a form on top of the page that 
 One the contact page the user will be able to see two links at the bottom of the page. One that will send the user to an edit contact form where they can change contact information on social media or email. This form will have pre-filled values of the current contact information with social media appearing as links.
 
 Wireframes: Sketch out what your core pages will look like and how they will work. Consider making a paper prototype to demonstrate and/or test key user interactions.
-Home page
+
+Home page:
+![alt text](http://url/to/img.png)
 
 Blogs:
 
