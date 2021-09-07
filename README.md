@@ -129,7 +129,10 @@ Product/Artwork Delete Modal:
 ![Product/Artwork Delete](https://i.imgur.com/FpMdRdi.png)
 
 **===Data Models ERD:===**
-![ERD](https://i.imgur.com/ONIh3si.png)
+![ERD](https://i.imgur.com/uFn4hWk.png)
+
+**===Userflow:===**
+![ERD](https://i.imgur.com/tCDcoTO.png)
 
 **===Milestones:===**
 
@@ -140,8 +143,6 @@ Client user is able to create, edit and delete Products, and only the client use
 Potential customer user is able to register, sign in, create reviews, edit reviews, and delete reviews - 9/10
 
 Client user is able to create, edit and delete Artwork, and only the client user will be able to do this - 9/11
-
-Client user is able to create, edit and delete Blogs, and only the client user will be able to do this - 9/12
 
 All forms will have error handling and display an error if incorrect information is added in displaying an issue and refusing to admit data into database if incorrect - 9/14
 
