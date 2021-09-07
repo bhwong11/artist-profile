@@ -1,8 +1,8 @@
-**Project: Ransom Bergen Artist Profile**
+**===Project: Ransom Bergen Artist Profile===**
 
 This is an Artist Profile and Art Showcase for writer and graphic design Ransom Bergen with the goal of people to buy his artwork. This will be a server rendered application using the Django Stack with a Postgres Database.
 
-**Main features:**
+**===Main features:===**
 
 Users will be able to view these 6 main pages:
 home page showcasing a featured art piece and navigation to other pages
@@ -24,7 +24,7 @@ External users will be able to create an account and create/edit/delete reviews 
 
 Each artwork, product, and blog can have tags added on to them to categorize them.
 
-**User Stories:**
+**===User Stories:===**
 
 **User: potential customer**
 
@@ -69,7 +69,7 @@ On the product page the user will be able to see a form on top of the page that 
 
 On the contact page the user will be able to see two links at the bottom of the page. One that will send the user to an edit contact form where they can change contact information on social media or email. This form will have pre-filled values of the current contact information with social media appearing as links.
 
-**Wireframes:**
+**===Wireframes:===**
 
 Home page:
 ![Home Page](https://i.imgur.com/xmc3NCl.png)
@@ -128,10 +128,10 @@ Product/Artwork Edit Page
 Product/Artwork Delete Modal:
 ![Product/Artwork Delete](https://i.imgur.com/FpMdRdi.png)
 
-**Data Models ERD:**
+**===Data Models ERD:===**
 ![ERD](https://i.imgur.com/ONIh3si.png)
 
-**Milestones:**
+**===Milestones:===**
 
 Application is able to send back html response for 6 main pagers (home, blogs, commissions, artwork, buy, and contact) containing information from postgres database, as well as a show page for specific products (seed data for now) - 9/8
 
