@@ -56,50 +56,70 @@ Home page:
 ![Home Page](https://i.imgur.com/xmc3NCl.png)
 
 Blogs:
+![Blog Page](https://i.imgur.com/PREPGKQ.png)
 
 Commissions:
+![Comissions Page](https://i.imgur.com/OeY6srK.png)
 
 Artwork
+![Artwork Page](https://i.imgur.com/GYQACyA.png)
 
 Products:
+![Products Page](https://i.imgur.com/2ha7E9s.png)
 
 Product Show Page:
+![Products Show Page](https://i.imgur.com/R4DYjWq.png)
 
 Product Show Page scroll down to reviews signed in:
+![Review Signed in](https://i.imgur.com/3viOYlX.png)
+
 Product Show Page scroll down to reviews signed out:
+![Reviews Signed Out](https://i.imgur.com/eDXIFDe.png)
 
 Register Button Modal(appears on button click of Register)
+![Reviews Register](https://i.imgur.com/eCa0rtF.png)
 
 Login Button Modal(appears on button click of Login)
-Edit Review Page:
+![Review Login Button](https://i.imgur.com/NvAqRiJ.png)
 
-Delete Review:
+Edit Review Page
+![Review Edit Page](https://i.imgur.com/nhJQgg0.png)
+
+Delete Review
+![Delete Review](https://i.imgur.com/8vCiRxM.png)
 
 Contact Page
 
-Client User Login:
+Client User Login
 
 Client Product Page for Edit/Create/Delete
 
-Artwork Page for Edit/Create/Delete:
+Artwork Page for Edit/Create/Delete
 
-Product/Artwork Create Page:
+Product/Artwork Create Page
 
-Product/Artwork Edit Page:
+Product/Artwork Edit Page
 
 Product/Artwork Delete Modal
 Data Models: Draw out the models and any associations for your project in an entity relationship diagram (ERD).
 
-Milestones: Divide your work into parts - the most essential features for your MVP, features that are important but not essential, and features that can be saved for a later iteration. Create 3-5 major milestones with dates outlining when you expect essential features will be done.
-Milestones -
+Milestones:
+
 Application is able to send back html response for 6 main pagers (home, blogs, commissions, artwork, buy, and contact) containing information from postgres database, as well as a show page for specific products (seed data for now) - 9/8
 
 Client user is able to create, edit and delete Products, and only the client user will be able to do this - 9/9
+
 Client user is able to create, edit and delete Blogs, and only the client user will be able to do this - 9/10
+
 Client user is able to create, edit and delete Artwork, and only the client user will be able to do this - 9/11
+
 Potential customer user is able to register, sign in, create reviews, edit reviews, and delete reviews - 9/12
+
 All forms will have error handling and display an error if incorrect information is added in displaying an issue and refusing to admit data into database if incorrect - 9/14
+
 Client user is not only able to add product/image artwork via image address but is able to upload on the site with image storage in s3 bucket -9/15
 Entire website is styled - 9/16
+
 Potential customer user is able to sort artwork by tags - 9/16(if time allows)
+
 Potential customer user is able to search by artwork title - 9/16(if time allows)
