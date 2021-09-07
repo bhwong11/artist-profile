@@ -53,7 +53,7 @@ One the contact page the user will be able to see two links at the bottom of the
 Wireframes: Sketch out what your core pages will look like and how they will work. Consider making a paper prototype to demonstrate and/or test key user interactions.
 
 Home page:
-![Home Page](https://imgur.com/xmc3NCl)
+![Home Page](https://i.imgur.com/xmc3NCl.png)
 
 Blogs:
 
