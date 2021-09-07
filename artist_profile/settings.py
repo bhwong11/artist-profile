@@ -121,9 +121,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+import environ
 
-AWS_ACCESS_KEY_ID = 'AKIAXO2N67NAKDEYJURU'
-AWS_SECRET_ACCESS_KEY = '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'
+env = environ.Env()
+environ.Env.read_env()
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'artist-images-bhwong'
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_ENDPOINT_URL = 'https://s3.us-east-2.amazonaws.com'

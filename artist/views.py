@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from django.views import View
+from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView,DeleteView
 from django.views.generic.base import TemplateView
 from django.urls import reverse
@@ -24,15 +25,17 @@ class ArtworkView(FormView):
         image = request.POST.get('image')
         description = request.POST.get('description')
         Artwork.objects.create(title = title,image =image,description=description)
-        redirect('home.html')
+        return redirect('home')
 
-    def get_success_url(self):
-        return reverse("home")
-
-class ArtworksView(TemplateView):
+class ArtworksView(FormView):
     template_name = 'artwork_index.html'
+    form_class = S3DirectUploadForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        form = S3DirectUploadForm(initial={'title': 'foo'})
+        image=Artwork.objects.get(title='h')
+        print(image.image)
+        context['form'] = S3DirectUploadForm(initial={'title': 'foo','image':image.image})
         context['artworks'] = Artwork.objects.all()
         return context
