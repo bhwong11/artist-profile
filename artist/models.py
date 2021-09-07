@@ -1,26 +1,65 @@
 from django.db import models
 
 # Create your models here.
-from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField
+from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField,URLField,OneToOneField,ManyToManyField,BooleanField
 from django.contrib.auth.models import User
 
 from django.db.models.deletion import CASCADE
+from django.db.models.fields.related import ForeignKey
 from s3direct.fields import S3DirectField
+
+
+DEFAULT_USER = 1
+
+class Profile(Model):
+    user = OneToOneField(User, on_delete=CASCADE,default=DEFAULT_USER)
+    isClient = BooleanField(default=False)
+
+class Tag(Model):
+    name = CharField(max_length=500, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Artwork(Model):
     title = CharField(max_length=144, unique=True)
     image = S3DirectField(dest='primary_destination', blank=True)
     description = TextField(max_length=1000)
-    published_date = DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=CASCADE, related_name='artworks')
+    date_created = DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=CASCADE, related_name='artworks',default=DEFAULT_USER)
+    catergory = CharField(max_length=144,default='Misc')
+    tags = ManyToManyField(Tag,related_name='tags')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ['published_date']
+        ordering = ['date_created']
 
-class Products(Model):
+
+class Product(Model):
     name = CharField(max_length=500, unique=True)
     image = S3DirectField
-    price = PositiveIntegerField
+    price = PositiveIntegerField()
+    buy_link = URLField()
+    catergory = CharField(max_length=300,default='Misc')
+    description = TextField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
+class Review(Model):
+    product = ForeignKey(Product, on_delete=CASCADE, related_name='reviews')
+    user = ForeignKey(User, on_delete=CASCADE, related_name='reviews',default=DEFAULT_USER)
+    title = CharField(max_length=300)
+    content = TextField(max_length=1000)
+    date_created=DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Blog(Model):
+    title = CharField(max_length=300)
+    content = TextField(max_length=1000)
+    user = ForeignKey(User, on_delete=CASCADE, related_name='blogs',default=DEFAULT_USER)
+    date_created=DateTimeField(auto_now_add=True)
