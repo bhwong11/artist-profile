@@ -53,7 +53,7 @@ One the contact page the user will be able to see two links at the bottom of the
 Wireframes: Sketch out what your core pages will look like and how they will work. Consider making a paper prototype to demonstrate and/or test key user interactions.
 
 Home page:
-![alt text](http://url/to/img.png)
+![alt text](https://www.dropbox.com/preview/GA%20Capstone/Screen%20Shot%202021-09-06%20at%2010.18.25%20PM.png)
 
 Blogs:
 
