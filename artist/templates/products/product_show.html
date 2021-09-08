@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%block title%}{{object.name}}{%endblock%}
+{%block content%}
+<h3>{{object.name}}</h3>
+<a href="{% url 'product_update' object.pk%}">Update Product</a>
+<a href="{% url 'product_delete' object.pk%}">Delete Product</a>
+<img src="{{object.image}}" alt="{{object.name}}">
+{%if messages%}
+    {%for message in messages%}
+        <h3>{{message}}</h3>
+    {%endfor%}
+{%endif%}
+<h3>Login</h3>
+<form action="{%url "login" %}" method="POST">
+    {% csrf_token %}
+    <label for="user-username">username</label>
+    <input type="text" name = "username" id='user-username'>
+    <label for="user-password">username</label>
+    <input type="password" name = "password" id='user-password'>
+    <input type="hidden" name="product" value = {{object.pk}}>
+    <input type="submit" value = "submit">
+</form>
+
+<h3>Reviews</h3>
+<form action="{% url 'review_new'%}" method="POST">
+    {% csrf_token %}
+    <label for="review-title">title</label>
+    <input type = "text" id = "review-title" name="title">
+    <label for="review-content">Content</label>
+    <textarea name="content" id="review-content" cols="30" rows="10"></textarea>
+    <input type="hidden" name = "product" value = {{object.pk}}>
+    <input type="submit" value = "Submit Review">
+</form>
+{%for review in object.reviews.all%}
+<h4>{{review.title}}</h4>
+<p>{{review.content}}</p>
+<form action="{%url "review_delete" review.pk%}" method="POST">
+{% csrf_token %}
+<button>delete</button>
+</form>
+<form action="{% url 'review_update' review.pk %}" method="POST">
+    {% csrf_token %}
+    <label for="review-title">title</label>
+    <input type = "text" id = "review-title" name="title" value = "{{review.title}}">
+    <label for="review-content">Content</label>
+    <textarea name="content" id="review-content" cols="30" rows="10">{{review.content}}</textarea>
+    <input type="submit" value = "Submit Review">
+</form>
+{%empty%}
+<p>No Reviews</p>
+{%endfor%}
+
+{%endblock%}

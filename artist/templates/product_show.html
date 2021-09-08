@@ -1,9 +1,0 @@
-{%extends 'base.html'%}
-{%block title%}{{object.name}}{%endblock%}
-{%block content%}
-<h3>{{object.name}}</h3>
-<a href="{% url 'product_update' object.pk%}">Update Product</a>
-<a href="{% url 'product_delete' object.pk%}">Delete Product</a>
-<img src="{{object.image}}" alt="{{object.name}}">
-
-{%endblock%}

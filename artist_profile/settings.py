@@ -138,3 +138,5 @@ S3DIRECT_DESTINATIONS = {
         'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
     },
 }
+
+LOGOUT_REDIRECT_URL = '/'
