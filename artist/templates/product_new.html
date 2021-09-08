@@ -1,0 +1,11 @@
+{%extends 'base.html'%}
+{%block title%}
+create product
+{%endblock%}
+{%block content%}
+<form method="POST" action="{% url 'product_new'%}">
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="submit">
+</form>
+{%endblock%}

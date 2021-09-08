@@ -39,7 +39,7 @@ class Artwork(Model):
 
 class Product(Model):
     name = CharField(max_length=500, unique=True)
-    image = S3DirectField
+    image = S3DirectField(dest='primary_destination', blank=True)
     price = PositiveIntegerField()
     buy_link = URLField()
     catergory = CharField(max_length=300,default='Misc')

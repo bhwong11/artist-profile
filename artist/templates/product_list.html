@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+{%block title%}Products{%endblock%}
+{%block content%}
+<h3>Products</h3>
+{%for product in object_list%}
+<p>{{product.name}}</p>
+<a href="{% url 'product_show' product.pk%}">Show Page</a>
+{%endfor%}
+{%endblock%}
