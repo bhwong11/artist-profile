@@ -12,6 +12,7 @@ from .models import Artwork, Product,Tag,Review,Profile,Blog
 from django.views.generic import FormView
 from .forms import ArtworkForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -60,6 +61,10 @@ class ProductsView(ListView):
 class ProductShowView(DetailView):
     model=Product
     template_name = 'products/product_show.html'
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['user_create_from'] = UserCreationForm()
+        return context
 
 class ProductsCreateView(CreateView):
     model=Product
@@ -125,5 +130,18 @@ class LoginView(View):
 
 class LogoutView(View):
     def post(self,request):
+        product_pk = request.POST.get('product')
         logout(request)
-        return redirect('/')
+        return redirect(f'/products/{product_pk}')
+
+class SignupView(View):
+    def post(self,request):
+        product_pk = request.POST.get('product')
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            return redirect(f'/products/{product_pk}')
+        else:
+            messages.add_message(request, messages.WARNING, form.errors)
+            return redirect(f'/products/{product_pk}')
