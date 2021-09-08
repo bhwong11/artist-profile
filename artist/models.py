@@ -26,7 +26,7 @@ class Artwork(Model):
     image = S3DirectField(dest='primary_destination', blank=True)
     description = TextField(max_length=1000)
     date_created = DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=CASCADE, related_name='artworks',default=DEFAULT_USER)
+    user = models.ForeignKey(User, on_delete=CASCADE, related_name='artworks')
     catergory = CharField(max_length=144,default='Misc')
     tags = ManyToManyField(Tag,related_name='tags')
 
@@ -44,6 +44,7 @@ class Product(Model):
     buy_link = URLField()
     catergory = CharField(max_length=300,default='Misc')
     description = TextField(max_length=1000)
+    user = ForeignKey(User, on_delete=CASCADE, related_name='products',default=DEFAULT_USER)
 
     def __str__(self):
         return self.name

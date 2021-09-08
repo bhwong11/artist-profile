@@ -22,19 +22,26 @@ class Home(View):
     def get(self,request):
         return render(request,'home.html')
 
-class ArtworkView(FormView):
-    template_name = 'create_test.html'
-    form_class = ArtworkForm
+class ArtworkCreateView(CreateView):
+    model = Artwork
+    template_name = 'artwork/create_test.html'
+    fields = ['title','image','description','catergory','tags']
+    success_url = '/artworks/'
 
-    def post(self,request):
-        title = request.POST.get('title')
-        image = request.POST.get('image')
-        description = request.POST.get('description')
-        Artwork.objects.create(title = title,image =image,description=description)
-        return redirect('artworks')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        super(ArtworkCreateView, self).form_valid(form)
+        return redirect('/artworks/')
+
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
 
 class ArtworksView(TemplateView):
-    template_name = 'artwork_list.html'
+    template_name = 'artwork/artwork_list.html'
     form_class = ArtworkForm
 
     def get_context_data(self, **kwargs):
@@ -46,13 +53,23 @@ class ArtworksView(TemplateView):
         return context
 
 class ArtworksUpdateView(UpdateView):
-    model = Product
-    fields = ['name','image','price','buy_link','catergory','description']
-    template_name='products/product_update.html'
+    model = Artwork
+    fields = ['title','image','description','catergory','tags']
+    template_name='artwork/artwork_update.html'
+    success_url = '/artworks/'
 
 
 class ArtworksDeleteView(DeleteView):
-    pass
+    model = Artwork
+    template_name = 'artwork/artwork_delete_confirmation.html'
+    success_url = '/artworks/'
+
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
 
 
 class ProductsView(ListView):
@@ -71,8 +88,16 @@ class ProductShowView(DetailView):
 class ProductsCreateView(CreateView):
     model=Product
     fields=['name','image','price','buy_link','catergory','description']
-    template_name = 'product_new.html'
+    template_name = 'products/product_new.html'
     success_url = '/products/'
+    
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
+
 
 class UpdateProductView(UpdateView):
     model = Product
@@ -81,12 +106,26 @@ class UpdateProductView(UpdateView):
 
     def get_success_url(self):
         return reverse("product_show",kwargs={'pk':self.object.pk})
+    
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
 
 
 class DeleteProductView(DeleteView):
     model = Product
-    template_name = 'product_delete_confirmation.html'
+    template_name = 'products/product_delete_confirmation.html'
     success_url = '/products/'
+
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
 
 class ReviewsCreateView(View):
     def post(self,request):

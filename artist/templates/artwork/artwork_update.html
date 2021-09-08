@@ -1,0 +1,11 @@
+{%extends 'base.html'%}
+{%block title%}
+update {{artwork.title}}
+{%endblock%}
+{%block content%}
+<form action="{% url 'artwork_update' artwork.pk %}" method="POST">
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="update">
+</form>
+{%endblock%}
