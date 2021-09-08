@@ -46,7 +46,9 @@ class ArtworksView(TemplateView):
         return context
 
 class ArtworksUpdateView(UpdateView):
-    pass
+    model = Product
+    fields = ['name','image','price','buy_link','catergory','description']
+    template_name='products/product_update.html'
 
 
 class ArtworksDeleteView(DeleteView):

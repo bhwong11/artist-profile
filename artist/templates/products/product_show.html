@@ -25,6 +25,7 @@
     <input type="hidden" name="product" value = {{object.pk}}>
     <input type="submit" value="Logout">
 </form>
+<h3>Reviews</h3>
 {%else%}
 <h3>Login</h3>
 {% comment %} login form {% endcomment %}
@@ -47,7 +48,6 @@
     <input type="submit" value ="Sign Up">
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
-{%endif%}
 
 <h3>Reviews</h3>
 {% comment %} New Review Form {% endcomment %}
@@ -60,6 +60,8 @@
     <input type="hidden" name = "product" value = {{object.pk}}>
     <input type="submit" value = "Submit Review">
 </form>
+{%endif%}
+
 {% comment %} Review List {% endcomment %}
 {%for review in object.reviews.all%}
 <h4>{{review.title}}</h4>
