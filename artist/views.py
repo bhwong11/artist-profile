@@ -141,6 +141,7 @@ class SignupView(View):
         if form.is_valid():
             user = form.save()
             login(request,user)
+            Profile.objects.create(user=request.user,isClient=False)
             return redirect(f'/products/{product_pk}')
         else:
             messages.add_message(request, messages.WARNING, form.errors)

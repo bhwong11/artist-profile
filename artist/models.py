@@ -12,7 +12,7 @@ from s3direct.fields import S3DirectField
 DEFAULT_USER = 1
 
 class Profile(Model):
-    user = OneToOneField(User, on_delete=CASCADE,default=DEFAULT_USER)
+    user = OneToOneField(User, on_delete=CASCADE)
     isClient = BooleanField(default=False)
 
 class Tag(Model):
