@@ -11,7 +11,7 @@ from django.urls import reverse
 from .models import Artwork, Product,Tag,Review,Profile,Blog
 from django.views.generic import FormView
 from .forms import ArtworkForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -120,10 +120,10 @@ class LoginView(View):
             return redirect(f'/products/{product_pk}')
 
         else:
-            context = {
-                'object':Product.objects.get(pk=product_pk),
-                'error':'The Username or Password was Inccorect'
-            }
             messages.add_message(request, messages.WARNING, 'The Username or Password was Inccorect')
             return redirect(f'/products/{product_pk}')
-            #return render(request,'products/product_show.html',context)
+
+class LogoutView(View):
+    def post(self,request):
+        logout(request)
+        return redirect('/')

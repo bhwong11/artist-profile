@@ -19,4 +19,5 @@ urlpatterns = [
     path('reviews/<int:pk>/update/',views.ReviewsUpdateView.as_view(),name='review_update'),
     path('reviews/<int:pk>/delete/',views.ReviewsDeleteView.as_view(),name='review_delete'),
     path('login/',views.LoginView.as_view(),name='login'),
+    path('logout/',views.LogoutView.as_view(),name='logout'),
 ]
