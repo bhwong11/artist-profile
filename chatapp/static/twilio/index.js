@@ -41,7 +41,7 @@ $(function() {
     print('Logging in...');
   
     // Get an access token for the current user, passing a username (identity)
-    $.getJSON('/token', function(data) {
+    $.getJSON('/chat/token/', function(data) {
   
   
       // Initialize the Chat client
@@ -60,15 +60,14 @@ $(function() {
           refreshToken(username);
         });
   
-      // Alert the user they have been assigned a random username
+      // Alert the user they are joined with username username
       username = data.identity;
-      print('You have been assigned a random username of: '
+      print('Weclome: '
       + '<span class="me">' + username + '</span>', true);
   
       }).catch(error => {
         console.error(error);
-        print('There was an error creating the chat client:<br/>' + error, true);
-        print('Please check your .env file.', false);
+        print('There was an error with chat:<br/>' + error, true);
       });
     });
   
@@ -76,7 +75,7 @@ $(function() {
       console.log('Token about to expire');
       // Make a secure request to your backend to retrieve a refreshed access token.
       // Use an authentication mechanism to prevent token exposure to 3rd parties.
-      $.getJSON('/token/' + identity, function(data) {
+      $.getJSON('/chat/token/' + identity, function(data) {
         console.log('updated token for chat client');          
         chatClient.updateToken(data.token);
       });
@@ -85,7 +84,7 @@ $(function() {
     function createOrJoinGeneralChannel() {
       // Get the general chat channel, which is where all the messages are
       // sent in this simple application
-      print('Attempting to join "general" chat channel...');
+      print('Attempting to join chat channel...');
       chatClient.getChannelByUniqueName('general')
       .then(function(channel) {
         generalChannel = channel;
