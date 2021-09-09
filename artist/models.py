@@ -52,8 +52,8 @@ class Product(Model):
 class Review(Model):
     product = ForeignKey(Product, on_delete=CASCADE, related_name='reviews')
     user = ForeignKey(User, on_delete=CASCADE, related_name='reviews',default=DEFAULT_USER)
-    title = CharField(max_length=300)
-    content = TextField(max_length=1000)
+    title = CharField(max_length=300, default='N/A')
+    content = TextField(max_length=1000, default='N/A')
     date_created=DateTimeField(auto_now_add=True)
 
     def __str__(self):

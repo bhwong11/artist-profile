@@ -24,7 +24,7 @@ class Home(View):
 
 class ArtworkCreateView(CreateView):
     model = Artwork
-    template_name = 'artwork/create_test.html'
+    template_name = 'artwork/artwork_create.html'
     fields = ['title','image','description','catergory','tags']
     success_url = '/artworks/'
 
@@ -38,7 +38,7 @@ class ArtworkCreateView(CreateView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 class ArtworksView(TemplateView):
     template_name = 'artwork/artwork_list.html'
@@ -63,7 +63,7 @@ class ArtworksUpdateView(UpdateView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 
 class ArtworksDeleteView(DeleteView):
@@ -76,7 +76,7 @@ class ArtworksDeleteView(DeleteView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 class TagsListView(ListView):
     model = Tag
@@ -88,16 +88,37 @@ class TagsCreateView(CreateView):
     template_name = 'tags/tag_create.html'
     success_url = '/tags/'
 
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/unauthorized/')
+
 class TagsUpdateView(UpdateView):
     model = Tag
     fields = ['name']
     template_name = 'tags/tag_update.html'
     success_url = '/tags/'
 
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/unauthorized/')
+
 class TagsDeleteView(DeleteView):
     model = Tag
     template_name = 'tags/tag_delete_confirmation.html'
     success_url = '/tags/'
+
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/unauthorized/')
 
 
 class ProductsView(ListView):
@@ -123,7 +144,7 @@ class ProductsCreateView(CreateView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 
 class UpdateProductView(UpdateView):
@@ -139,7 +160,7 @@ class UpdateProductView(UpdateView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 
 class DeleteProductView(DeleteView):
@@ -152,7 +173,7 @@ class DeleteProductView(DeleteView):
         if request.user.is_authenticated:
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
-        return redirect('/')
+        return redirect('/unauthorized/')
 
 class ReviewsCreateView(View):
     def post(self,request):
@@ -160,6 +181,13 @@ class ReviewsCreateView(View):
             title = request.POST.get('title')
             content = request.POST.get('content')
             user = request.user
+            #check if there is not title or content, and if user is authenicated
+            if len(title)<1:
+                title = 'No Title'
+            if len(content)<1:
+                content = 'No Content'
+            if not request.user.is_authenticated:
+                return redirect('/unauthorized/')
             product = Product.objects.get(pk=request.POST.get('product'))
             new_review = Review.objects.create(title=title,content=content,user=user,product=product)
             return redirect(f'/products/{new_review.product.pk}')
@@ -168,17 +196,26 @@ class ReviewsCreateView(View):
             return redirect(f'/products/{product}')
 
 
+
 class ReviewsUpdateView(View):
     def post(self,request,pk):
         title = request.POST.get('title')
         content = request.POST.get('content')
         review = Review.objects.get(pk=pk)
+        if len(title)<1:
+            title = 'No Title'
+        if len(content)<1:
+                content = 'No Content'
+        if not request.user.pk == Review.objects.get(pk=pk).user.pk:
+            return redirect('/unauthorized/')
         updated_review = Review.objects.filter(pk=pk).update(title=title,content=content)
         return redirect(f'/products/{review.product.pk}')
 
 class ReviewsDeleteView(View):
     def post(self,request,pk):
         review = Review.objects.get(pk=pk)
+        if not request.user.pk == Review.objects.get(pk=pk).user.pk:
+            return redirect('/unauthorized/')
         Review.objects.filter(pk=pk).delete()
         return redirect(f'/products/{review.product.pk}')
 
@@ -209,9 +246,13 @@ class BlogsDeleteView(DeleteView):
     template_name = 'blogs/blog_delete_confirmation.html'
     success_url = '/blogs/'
 
+class ContactView(TemplateView):
+    template_name = 'contact.html'
 
 
 class LoginView(View):
+    def get(self,request):
+        return render(request,'login.html')
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -219,10 +260,14 @@ class LoginView(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if product_pk is None:
+                return redirect('/')
             return redirect(f'/products/{product_pk}')
 
         else:
             messages.add_message(request, messages.WARNING, 'The Username or Password was Inccorect')
+            if product_pk is None:
+                return redirect('/login/')
             return redirect(f'/products/{product_pk}')
 
 class LogoutView(View):
@@ -243,3 +288,6 @@ class SignupView(View):
         else:
             messages.add_message(request, messages.WARNING, form.errors)
             return redirect(f'/products/{product_pk}')
+
+class UnauthorizedView(TemplateView):
+    template_name = 'unauthorized.html'

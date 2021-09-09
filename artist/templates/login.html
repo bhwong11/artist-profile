@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block title%}
+Admin Login
+{%endblock%}
+{%block content%}
+<h1>User/Admin Login</h1>
+{%if messages%}
+    {%for message in messages%}
+        <h3>{{message}}</h3>
+    {%endfor%}
+{%endif%}
+<form action="{%url "login" %}" method="POST">
+    {% csrf_token %}
+    <label for="user-username">username</label>
+    <input type="text" name = "username" id='user-username'>
+    <label for="user-password">username</label>
+    <input type="password" name = "password" id='user-password'>
+    <input type="submit" value = "Login">
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{%endblock%}

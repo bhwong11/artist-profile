@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     path('',views.Home.as_view(),name='home'),
-    path('artworks/new/',views.ArtworkCreateView.as_view(),name='create'),
+    path('artworks/new/',views.ArtworkCreateView.as_view(),name='artwork_create'),
     path('artworks/',views.ArtworksView.as_view(),name='artworks'),
     path('artworks/<int:pk>/update',views.ArtworksUpdateView.as_view(),name='artwork_update'),
     path('artworks/<int:pk>/delete',views.ArtworksDeleteView.as_view(),name='artwork_delete'),
@@ -26,7 +26,9 @@ urlpatterns = [
     path('blogs/new',views.BlogsCreateView.as_view(),name='blog_new'),
     path('blogs/<int:pk>/update',views.BlogsUpdateView.as_view(),name='blog_update'),
     path('blogs/<int:pk>/delete',views.BlogsDeleteView.as_view(),name='blog_delete'),
+    path('contact',views.ContactView.as_view(),name='contact'),
     path('login/',views.LoginView.as_view(),name='login'),
     path('logout/',views.LogoutView.as_view(),name='logout'),
     path('signup/',views.SignupView.as_view(),name='signup'),
+    path('unauthorized/',views.UnauthorizedView.as_view(),name='unauthorized'),
 ]
