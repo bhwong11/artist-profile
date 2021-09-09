@@ -64,6 +64,7 @@ $(function() {
       username = data.identity;
       print('Welcome: '
       + '<span class="me">' + username + '</span>', true);
+
   
       }).catch(error => {
         console.error(error);
@@ -74,18 +75,24 @@ $(function() {
     //CUSTOM FUNCTIONS
     $.getJSON('/chat/userJoin',function(data){
       alert(data.isInChat)
+      if(data.isInChat==='true'){
+        return print('<h3 style="color:aqua;">Admin is in Chat</h3>',true)
+      }
+      if(data.isInChat==='false'){
+        return print('<h3 style="color:red;">Admin is not in Chat, Please come back later!</h3>',true)
+      }
     })
 
-    window.onbeforeunload = async function(){
+
+    $('#leave_chat').on('click',async function(){
       alert('hi')
       await $.getJSON('/chat/userLeaves',function(data){
-        alert(data.left)
+        alert(`left user: ${data.left}`)
+        generalChannel.sendMessage(`${data.left} left chat`)
+        window.location.href = "/";
       })
-    };
+    })
 
-    $(window).unload(function(){
-      alert('Bye.');
-    });
   
     function refreshToken(identity) {
       console.log('Token about to expire');
@@ -107,6 +114,7 @@ $(function() {
         console.log('Found general channel:');
         console.log(generalChannel);
         setupChannel();
+        generalChannel.sendMessage(`${username} joined chat`)
       }).catch(function() {
         // If it doesn't exist, let's create it
         console.log('Creating general channel');

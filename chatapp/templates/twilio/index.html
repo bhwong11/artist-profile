@@ -8,16 +8,11 @@
     <link rel="stylesheet" href="{% static 'twilio/index.css' %}">
 </head>
 <body>
-  <header>
-    <a href="https://www.twilio.com/docs/api/chat/guides/quickstart-js"
-      target="_blank">Read the getting started guide
-        <i class="fa fa-fw fa-external-link"></i>
-    </a>
-  </header>
 
   <section>
     <div id="messages"></div>
     <input id="chat-input" type="text" placeholder="say anything" autofocus/>
+    <div id = "leave_chat">Leave Chat</div>
   </section>
 
   <script src="https://media.twiliocdn.com/sdk/js/chat/releases/4.0.0/twilio-chat.js"></script>
