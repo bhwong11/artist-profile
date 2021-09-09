@@ -199,10 +199,15 @@ class BlogsCreateView(CreateView):
         return redirect('/blogs/')
 
 class BlogsUpdateView(UpdateView):
-    pass
+    model = Blog
+    fields = ['title','content']
+    template_name = 'blogs/blog_update.html'
+    success_url = '/blogs/'
 
 class BlogsDeleteView(DeleteView):
-    pass
+    model = Blog
+    template_name = 'blogs/blog_delete_confirmation.html'
+    success_url = '/blogs/'
 
 
 
