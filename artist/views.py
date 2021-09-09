@@ -36,7 +36,7 @@ class ArtworkCreateView(CreateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -61,7 +61,7 @@ class ArtworksUpdateView(UpdateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -74,7 +74,7 @@ class ArtworksDeleteView(DeleteView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -91,7 +91,7 @@ class TagsCreateView(CreateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -104,7 +104,7 @@ class TagsUpdateView(UpdateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -116,7 +116,7 @@ class TagsDeleteView(DeleteView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -142,7 +142,7 @@ class ProductsCreateView(CreateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -158,7 +158,7 @@ class UpdateProductView(UpdateView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -171,7 +171,7 @@ class DeleteProductView(DeleteView):
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.profile.isClient:
+            if request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -283,7 +283,7 @@ class SignupView(View):
         if form.is_valid():
             user = form.save()
             login(request,user)
-            Profile.objects.create(user=request.user,isClient=False)
+            Profile.objects.create(user=request.user,is_client=False)
             return redirect(f'/products/{product_pk}')
         else:
             messages.add_message(request, messages.WARNING, form.errors)

@@ -13,8 +13,8 @@ DEFAULT_USER = 1
 
 class Profile(Model):
     user = OneToOneField(User, on_delete=CASCADE)
-    isClient = BooleanField(default=False)
-    isInChat = BooleanField(default=False)
+    is_client = BooleanField(default=False)
+    is_in_Chat = BooleanField(default=False)
 
 class Tag(Model):
     name = CharField(max_length=500, unique=True)

@@ -62,13 +62,29 @@ $(function() {
   
       // Alert the user they are joined with username username
       username = data.identity;
-      print('Weclome: '
+      print('Welcome: '
       + '<span class="me">' + username + '</span>', true);
   
       }).catch(error => {
         console.error(error);
         print('There was an error with chat:<br/>' + error, true);
       });
+    });
+
+    //CUSTOM FUNCTIONS
+    $.getJSON('/chat/userJoin',function(data){
+      alert(data.isInChat)
+    })
+
+    window.onbeforeunload = async function(){
+      alert('hi')
+      await $.getJSON('/chat/userLeaves',function(data){
+        alert(data.left)
+      })
+    };
+
+    $(window).unload(function(){
+      alert('Bye.');
     });
   
     function refreshToken(identity) {
@@ -84,7 +100,7 @@ $(function() {
     function createOrJoinGeneralChannel() {
       // Get the general chat channel, which is where all the messages are
       // sent in this simple application
-      print('Attempting to join chat channel...');
+      print('Attempting to join general channel...');
       chatClient.getChannelByUniqueName('general')
       .then(function(channel) {
         generalChannel = channel;
