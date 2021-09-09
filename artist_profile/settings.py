@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     's3direct',
     'artist',
+    'chatapp',
 ]
 
 MIDDLEWARE = [
@@ -138,5 +139,10 @@ S3DIRECT_DESTINATIONS = {
         'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
     },
 }
+
+import os
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__),'static'),)
 
 LOGOUT_REDIRECT_URL = '/'
