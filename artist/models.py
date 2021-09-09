@@ -62,5 +62,5 @@ class Review(Model):
 class Blog(Model):
     title = CharField(max_length=300)
     content = TextField(max_length=1000)
-    user = ForeignKey(User, on_delete=CASCADE, related_name='blogs',default=DEFAULT_USER)
+    user = ForeignKey(User, on_delete=CASCADE, related_name='blogs')
     date_created=DateTimeField(auto_now_add=True)

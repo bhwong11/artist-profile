@@ -182,6 +182,30 @@ class ReviewsDeleteView(View):
         Review.objects.filter(pk=pk).delete()
         return redirect(f'/products/{review.product.pk}')
 
+class BlogsListView(ListView):
+    model = Blog
+    template_name = 'blogs/blogs_list.html'
+
+class BlogsCreateView(CreateView):
+    model = Blog
+    fields = ['title','content']
+    template_name = 'blogs/blog_create.html'
+    success_url = '/blogs/'
+
+    #added user to form
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        super(BlogsCreateView, self).form_valid(form)
+        return redirect('/blogs/')
+
+class BlogsUpdateView(UpdateView):
+    pass
+
+class BlogsDeleteView(DeleteView):
+    pass
+
+
+
 class LoginView(View):
     def post(self, request):
         username = request.POST.get('username')
