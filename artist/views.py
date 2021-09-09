@@ -78,21 +78,31 @@ class ArtworksDeleteView(DeleteView):
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/')
 
+class TagsListView(ListView):
+    model = Tag
+    template_name = 'tags/tags_list.html'
 
 class TagsCreateView(CreateView):
-    pass
+    model = Tag
+    fields = ['name']
+    template_name = 'tags/tag_create.html'
+    success_url = '/tags/'
 
 class TagsUpdateView(UpdateView):
-    pass
+    model = Tag
+    fields = ['name']
+    template_name = 'tags/tag_update.html'
+    success_url = '/tags/'
 
 class TagsDeleteView(DeleteView):
-    pass
+    model = Tag
+    template_name = 'tags/tag_delete_confirmation.html'
+    success_url = '/tags/'
 
 
 class ProductsView(ListView):
     model = Product
     template_name = 'products/product_list.html'
-    #use a form instance and a for loop to pass to pass in context[form{review.id}]
 
 class ProductShowView(DetailView):
     model=Product

@@ -19,7 +19,7 @@
     <input type="submit" value ="submit">
     
     </form>
-    <a href="{%url 'tag_create'%}">create tag</a>
+    <a href="{%url 'tag_new'%}">create tag</a>
     {%for artwork in artworks%}
     <h3>{{artwork.title}}</h3>
     <a href="{%url 'artwork_update' artwork.pk%}">Update</a>
