@@ -58,6 +58,13 @@ class ArtworksUpdateView(UpdateView):
     template_name='artwork/artwork_update.html'
     success_url = '/artworks/'
 
+    #check if user is client will send to hompage if not
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.isClient:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/')
+
 
 class ArtworksDeleteView(DeleteView):
     model = Artwork
@@ -70,6 +77,16 @@ class ArtworksDeleteView(DeleteView):
             if request.user.profile.isClient:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/')
+
+
+class TagsCreateView(CreateView):
+    pass
+
+class TagsUpdateView(UpdateView):
+    pass
+
+class TagsDeleteView(DeleteView):
+    pass
 
 
 class ProductsView(ListView):

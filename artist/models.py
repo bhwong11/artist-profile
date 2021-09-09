@@ -28,7 +28,7 @@ class Artwork(Model):
     date_created = DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=CASCADE, related_name='artworks')
     catergory = CharField(max_length=144,default='Misc')
-    tags = ManyToManyField(Tag,related_name='tags')
+    tags = ManyToManyField(Tag,related_name='artworks')
 
     def __str__(self):
         return self.title
