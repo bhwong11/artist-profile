@@ -22,6 +22,8 @@ from rest_framework import generics
 from twilio.rest import Client
 from django.conf import settings                                                                                                                                                       
 from django.http import HttpResponse
+from random import randint
+import threading
 
 
 # Create your views here.
@@ -269,7 +271,7 @@ class LoginView(View):
             if user.profile.is_client == True:
                 request.session['username'] = username
                 request.session['password']= password
-                request.session['mfa_code'] = '1234'
+                request.session['mfa_code'] = randomCodeGenerator()
                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
                 client.messages.create(to='+16512480589',
                 from_='+14086178934',
@@ -297,13 +299,23 @@ class MFAloginView(View):
             print("MFA LOGIN!!")
             username = request.session.get('username')
             password = request.session.get('password')
-            print(username)
-            print(password)
             user = authenticate(request, username=username, password=password)
             login(request, user)
             return redirect('/')
         else:
             return redirect('/mfalogin')
+
+class MFAnewcode(View):
+    def post(self,request):
+        print('HIT')
+        request.session['mfa_code'] = randomCodeGenerator()
+        print('HIT ROute',request.session['mfa_code'])
+        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+        client.messages.create(to='+16512480589',
+                from_='+14086178934',
+                body=request.session['mfa_code'])
+        return redirect('/mfalogin')
+
 
 class LogoutView(View):
     def post(self,request):
@@ -343,3 +355,11 @@ class HomerenderView(APIView):
     def get(self, request):
         queryset = Profile.objects.all()
         return Response({'profiles': queryset})
+
+
+def randomCodeGenerator():
+    code = ''
+    for i in range(0,3):
+        code+=str(randint(1,10))
+    print('CODE!!',code)
+    return code
