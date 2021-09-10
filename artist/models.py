@@ -1,7 +1,8 @@
 from django.db import models
 
 # Create your models here.
-from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField,URLField,OneToOneField,ManyToManyField,BooleanField,PhoneNumberField
+from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField,URLField,OneToOneField,ManyToManyField,BooleanField
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 from django.db.models.deletion import CASCADE
@@ -15,7 +16,8 @@ class Profile(Model):
     user = OneToOneField(User, on_delete=CASCADE)
     is_client = BooleanField(default=False)
     is_in_Chat = BooleanField(default=False)
-    phone_number = PhoneNumberField(null=False, blank=True, unique=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     MFA_code = PositiveIntegerField(default=0000)
 
 class Tag(Model):

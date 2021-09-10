@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%block title%}
+MFA Login
+{%endblock%}
+{%block content%}
+<form action="{%url 'mfalogin'%}" method="POST">
+    {% csrf_token %}
+    <label for="code">enter code</label>
+    <input type="text" name="code" id="code">
+    <input type="submit" value="submit">
+</form>
+{%endblock%}

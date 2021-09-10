@@ -8,7 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.urls import reverse
 
-from .models import Artwork, Product,Tag,Review,Profile,Blog
+from .models import Artwork, Product,Tag,Review,Profile,Blog,User
 from django.views.generic import FormView
 from .forms import ArtworkForm
 from django.contrib.auth import authenticate, login, logout
@@ -266,6 +266,16 @@ class LoginView(View):
         product_pk = request.POST.get('product')
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            if user.profile.is_client == True:
+                request.session['username'] = username
+                request.session['password']= password
+                request.session['mfa_code'] = '1234'
+                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                client.messages.create(to='+16512480589',
+                from_='+14086178934',
+                body=request.session['mfa_code'])
+                print('IS CLIENTDFAS!!')
+                return redirect('/mfalogin/')
             login(request, user)
             if product_pk is None:
                 return redirect('/')
@@ -276,6 +286,24 @@ class LoginView(View):
             if product_pk is None:
                 return redirect('/login/')
             return redirect(f'/products/{product_pk}')
+
+class MFAloginView(View):
+    def get(self,request):
+        return render(request,'mfalogin.html')
+
+    def post(self,request):
+        recieved_code = request.POST.get('code')
+        if str(recieved_code) == request.session.get('mfa_code'):
+            print("MFA LOGIN!!")
+            username = request.session.get('username')
+            password = request.session.get('password')
+            print(username)
+            print(password)
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return redirect('/')
+        else:
+            return redirect('/mfalogin')
 
 class LogoutView(View):
     def post(self,request):

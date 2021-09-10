@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout/',views.LogoutView.as_view(),name='logout'),
     path('signup/',views.SignupView.as_view(),name='signup'),
     path('homerender/',views.HomerenderView.as_view(),name='homerender'),
-    path('broadcast/', views.Broadcast_sms.as_view(), name="default"),
+    path('broadcast/', views.Broadcast_sms.as_view(), name="broadcast"),
+    path('mfalogin/', views.MFAloginView.as_view(), name="mfalogin"),
     path('unauthorized/',views.UnauthorizedView.as_view(),name='unauthorized'),
 ]
