@@ -24,22 +24,17 @@ def userJoin(request):
             Profile.objects.filter(pk=request.user.profile.pk).update(is_in_Chat=True)
 
     if len(Profile.objects.filter(is_in_Chat=True))>0:
-        print('🇧🇱','client is in')  
         return JsonResponse({'isInChat':'true'})
     else:
-        print('🇧🇱','client is OUT')  
         return JsonResponse({'isInChat':'false'})
 
 
 def userLeaves(request):
-    print('hit route')
     if request.user.is_authenticated:
         if request.user.profile.is_client:
             Profile.objects.filter(pk=request.user.profile.pk).update(is_in_Chat=False)
-            print('upadted')
             return JsonResponse({'left':f"Admin {request.user.username}"})
 
-        print('🇧🇱',f'{request.user.username} left')  
         return JsonResponse({'left':request.user.username})
     return JsonResponse({'left':'anonymous'})
 

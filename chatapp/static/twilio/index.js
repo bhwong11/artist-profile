@@ -74,7 +74,6 @@ $(function() {
 
     //CUSTOM FUNCTIONS
     $.getJSON('/chat/userJoin',function(data){
-      alert(data.isInChat)
       if(data.isInChat==='true'){
         return print('<h3 style="color:aqua;">Admin is in Chat</h3>',true)
       }
@@ -85,9 +84,7 @@ $(function() {
 
 
     $('#leave_chat').on('click',async function(){
-      alert('hi')
       await $.getJSON('/chat/userLeaves',function(data){
-        alert(`left user: ${data.left}`)
         generalChannel.sendMessage(`${data.left} left chat`)
         window.location.href = "/";
       })
@@ -107,7 +104,7 @@ $(function() {
     function createOrJoinGeneralChannel() {
       // Get the general chat channel, which is where all the messages are
       // sent in this simple application
-      print('Attempting to join general channel...');
+      //print('Attempting to join general channel...');
       chatClient.getChannelByUniqueName('general')
       .then(function(channel) {
         generalChannel = channel;

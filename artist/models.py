@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField,URLField,OneToOneField,ManyToManyField,BooleanField
+from django.db.models import Model, CharField, PositiveIntegerField, TextField,DateTimeField,URLField,OneToOneField,ManyToManyField,BooleanField,PhoneNumberField
 from django.contrib.auth.models import User
 
 from django.db.models.deletion import CASCADE
@@ -15,6 +15,8 @@ class Profile(Model):
     user = OneToOneField(User, on_delete=CASCADE)
     is_client = BooleanField(default=False)
     is_in_Chat = BooleanField(default=False)
+    phone_number = PhoneNumberField(null=False, blank=True, unique=True)
+    MFA_code = PositiveIntegerField(default=0000)
 
 class Tag(Model):
     name = CharField(max_length=500, unique=True)

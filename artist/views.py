@@ -15,6 +15,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
+from rest_framework.views import APIView
+from rest_framework import generics
+from twilio.rest import Client
+from django.conf import settings                                                                                                                                                       
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -265,7 +272,7 @@ class LoginView(View):
             return redirect(f'/products/{product_pk}')
 
         else:
-            messages.add_message(request, messages.WARNING, 'The Username or Password was Inccorect')
+            messages.add_message(request, messages.WARNING, 'The Username or Password was Incorrect')
             if product_pk is None:
                 return redirect('/login/')
             return redirect(f'/products/{product_pk}')
@@ -289,5 +296,22 @@ class SignupView(View):
             messages.add_message(request, messages.WARNING, form.errors)
             return redirect(f'/products/{product_pk}')
 
+class Broadcast_sms(View):
+    def post(self,request):
+        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+        client.messages.create(to='+16512480589',
+                                from_='+14086178934',
+                                body='twilio test')
+        return HttpResponse("messages sent!", 200)
+
+
 class UnauthorizedView(TemplateView):
     template_name = 'unauthorized.html'
+
+class HomerenderView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'homerender.html'
+    
+    def get(self, request):
+        queryset = Profile.objects.all()
+        return Response({'profiles': queryset})
