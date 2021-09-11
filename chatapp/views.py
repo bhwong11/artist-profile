@@ -45,8 +45,14 @@ def generateToken(identity):
     sync_service_sid = settings.TWILIO_SYNC_SID
     api_sid          = settings.TWILIO_API_SID
     api_secret       = settings.TWILIO_API_SECRET
+    print(account_sid)
+    print(chat_service_sid)
+    print(sync_service_sid)
+    print(api_sid)
+    print(api_secret)
     # Create access token with credentials
     token = AccessToken(account_sid, api_sid, api_secret, identity=identity)
+    print(token)
 
     # Create a Sync grant and add to token
     if sync_service_sid:
@@ -59,4 +65,4 @@ def generateToken(identity):
         token.add_grant(chat_grant)
 
     # Return token info as JSON
-    return JsonResponse({'identity':identity,'token':token.to_jwt().decode('utf-8')})
+    return JsonResponse({'identity':identity,'token':token.to_jwt()})

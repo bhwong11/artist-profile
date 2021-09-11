@@ -40,7 +40,32 @@ INSTALLED_APPS = [
     's3direct',
     'artist',
     'chatapp',
+    'social_django',
 ]
+#AUTH_USER_MODEL = 'artist.User'
+
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+## Auth0 settings
+#SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+#SOCIAL_AUTH_AUTH0_DOMAIN = env('SOCIAL_AUTH_AUTH0_DOMAIN')
+#SOCIAL_AUTH_AUTH0_KEY = env('SOCIAL_AUTH_AUTH0_KEY')
+#SOCIAL_AUTH_AUTH0_SECRET = env('SOCIAL_AUTH_AUTH0_SECRET')
+#SOCIAL_AUTH_AUTH0_SCOPE = [
+#    'openid',
+#    'profile',
+#    'email'
+#]
+#
+#AUTHENTICATION_BACKENDS = {
+#    'social_core.backends.auth0.Auth0OAuth2',
+#    'django.contrib.auth.backends.ModelBackend'
+#}
+#
+#LOGIN_URL = '/login/auth0'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,11 +146,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
 
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
