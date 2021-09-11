@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+{%if user.profile.is_client%}
+    <a href="{% url 'profile_show' user.profile.pk%}">Show/Edit Profile</a>
+{%endif%}
 <div id = 'home_root'>
     <h1>Hello World</h1>
     <h3>Loading...</h3>

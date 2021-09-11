@@ -18,6 +18,7 @@ class Profile(Model):
     is_in_Chat = BooleanField(default=False)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    #get rid of this
     MFA_code = PositiveIntegerField(default=0000)
 
 class Tag(Model):

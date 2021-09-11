@@ -34,6 +34,31 @@ class Home(View):
     def get(self,request):
         return render(request,'home.html')
 
+class ProfileShowView(DetailView):
+    model = Profile
+    template_name = 'profiles/profile_show.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.is_client:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/unauthorized/')
+
+class ProfileUpateView(UpdateView):
+    model = Profile
+    fields = ['phone_number']
+    template_name='profiles/profile_update.html'
+
+    def get_success_url(self):
+        print('KWAYGS',self.object.pk)
+        return reverse("profile_show",kwargs={'pk':self.object.pk})
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.profile.is_client:
+                return super().dispatch(request, *args, **kwargs)
+        return redirect('/unauthorized/')
+
 class ArtworkCreateView(CreateView):
     model = Artwork
     template_name = 'artwork/artwork_create.html'
@@ -282,17 +307,12 @@ class LoginView(View):
                 )
 
                 def change_mfa_code():
-                    print('283',request.session)
                     print('284',request.session['mfa_code'])
                     mfa_code = randomCodeGenerator()
                     request.session['mfa_code'] = mfa_code
                     request.session.save()
                     request.session.modified = True
-                    #new post
-                    #requests.post('http://localhost:8000/randomfmacode/', data={'param':1})
-                    print('287 Code expired',request.session['mfa_code'])
-                    print('288',request.session['mfa_code'])
-                #request.session['mfa_code'] = randomCodeGenerator()
+                    print('287 Code expired, new code:',request.session['mfa_code'])
 
                 timer = Timer(60.0,
                     change_mfa_code,
@@ -321,8 +341,7 @@ class MFAloginView(View):
     def post(self,request):
         recieved_code = request.POST.get('code')
         print('317 REC CODE',recieved_code)
-        #print('318',request.session.get('mfa_code'))
-        print('319',request.session['mfa_code'])
+        print('Correct Code',request.session['mfa_code'])
         if str(recieved_code) == request.session['mfa_code']:
             print("MFA LOGIN!!")
             username = request.session.get('username')
@@ -331,20 +350,24 @@ class MFAloginView(View):
             login(request, user)
             return redirect('/')
         else:
+            messages.add_message(request, messages.WARNING, 'Incorrect Code, click resend to get another code')
             return redirect('/mfalogin')
 
 class MFAnewcode(View):
     def post(self,request):
-        print('HIT')
         request.session['mfa_code'] = randomCodeGenerator()
         print('HIT ROute',request.session['mfa_code'])
+        username = request.session.get('username')
+        password = request.session.get('password')
+        user = authenticate(request, username=username, password=password)
         if user.profile.is_client:
             client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-            client.messages.create(to='+16512480589',
+            client.messages.create(to=user.profile.phone_number,
                 from_='+14086178934',
                 body=request.session['mfa_code'])
             return redirect('/mfalogin')
         else:
+            messages.add_message(request, messages.WARNING, 'You are not an admin, please log in via the log in screen')
             return redirect('/mfalogin')
 
 
