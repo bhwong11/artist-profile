@@ -34,5 +34,6 @@ urlpatterns = [
     path('broadcast/', views.Broadcast_sms.as_view(), name="broadcast"),
     path('mfalogin/', views.MFAloginView.as_view(), name="mfalogin"),
     path('newmfacode/', views.MFAnewcode.as_view(), name="newmfacode"),
+    path('randomfmacode/',views.ChangeFMACode.as_view(),name="change_fma_code"),
     path('unauthorized/',views.UnauthorizedView.as_view(),name='unauthorized'),
 ]

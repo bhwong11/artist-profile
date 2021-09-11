@@ -24,9 +24,12 @@ from django.conf import settings
 from django.http import HttpResponse
 from random import randint
 import threading
+from threading import Timer
+import requests
 
 
 # Create your views here.
+
 class Home(View):
     def get(self,request):
         return render(request,'home.html')
@@ -271,11 +274,33 @@ class LoginView(View):
             if user.profile.is_client == True:
                 request.session['username'] = username
                 request.session['password']= password
-                request.session['mfa_code'] = randomCodeGenerator()
+                request.session['mfa_code'] = randomCodeGenerator() or 'adjfas;dlfasd'
                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
                 client.messages.create(to='+16512480589',
                 from_='+14086178934',
-                body=request.session['mfa_code'])
+                body=request.session['mfa_code']
+                )
+
+                def change_mfa_code():
+                    print('283',request.session)
+                    print('284',request.session['mfa_code'])
+                    mfa_code = randomCodeGenerator()
+                    request.session['mfa_code'] = mfa_code
+                    request.session.save()
+                    request.session.modified = True
+                    #new post
+                    #requests.post('http://localhost:8000/randomfmacode/', data={'param':1})
+                    print('287 Code expired',request.session['mfa_code'])
+                    print('288',request.session['mfa_code'])
+                #request.session['mfa_code'] = randomCodeGenerator()
+
+                timer = Timer(10.0,
+                    change_mfa_code,
+                )
+                print(timer)
+                timer.start()
+                    
+
                 print('IS CLIENTDFAS!!')
                 return redirect('/mfalogin/')
             login(request, user)
@@ -295,7 +320,10 @@ class MFAloginView(View):
 
     def post(self,request):
         recieved_code = request.POST.get('code')
-        if str(recieved_code) == request.session.get('mfa_code'):
+        print('317 REC CODE',recieved_code)
+        #print('318',request.session.get('mfa_code'))
+        print('319',request.session['mfa_code'])
+        if str(recieved_code) == request.session['mfa_code']:
             print("MFA LOGIN!!")
             username = request.session.get('username')
             password = request.session.get('password')
@@ -356,6 +384,10 @@ class HomerenderView(APIView):
         queryset = Profile.objects.all()
         return Response({'profiles': queryset})
 
+class ChangeFMACode(View):
+    def post(self,request):
+        request.session['mfa_code'] = randomCodeGenerator()
+        return redirect('/mfalogin/')
 
 def randomCodeGenerator():
     code = ''
