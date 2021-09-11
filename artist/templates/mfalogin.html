@@ -3,6 +3,11 @@
 MFA Login
 {%endblock%}
 {%block content%}
+{%if messages%}
+    {%for message in messages%}
+        <h3>{{message}}</h3>
+    {%endfor%}
+{%endif%}
 <form action="{%url 'mfalogin'%}" method="POST">
     {% csrf_token %}
     <label for="code">enter code</label>

@@ -276,7 +276,7 @@ class LoginView(View):
                 request.session['password']= password
                 request.session['mfa_code'] = randomCodeGenerator() or 'adjfas;dlfasd'
                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-                client.messages.create(to='+16512480589',
+                client.messages.create(to=user.profile.phone_number,
                 from_='+14086178934',
                 body=request.session['mfa_code']
                 )
@@ -294,7 +294,7 @@ class LoginView(View):
                     print('288',request.session['mfa_code'])
                 #request.session['mfa_code'] = randomCodeGenerator()
 
-                timer = Timer(10.0,
+                timer = Timer(60.0,
                     change_mfa_code,
                 )
                 print(timer)
@@ -338,11 +338,14 @@ class MFAnewcode(View):
         print('HIT')
         request.session['mfa_code'] = randomCodeGenerator()
         print('HIT ROute',request.session['mfa_code'])
-        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-        client.messages.create(to='+16512480589',
+        if user.profile.is_client:
+            client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+            client.messages.create(to='+16512480589',
                 from_='+14086178934',
                 body=request.session['mfa_code'])
-        return redirect('/mfalogin')
+            return redirect('/mfalogin')
+        else:
+            return redirect('/mfalogin')
 
 
 class LogoutView(View):
