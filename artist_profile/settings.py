@@ -188,10 +188,12 @@ S3DIRECT_DESTINATIONS = {
     },
 }
 
+
+
 import os
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__),'static'),)
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__),'static'),)
 
 TWILIO_ACCT_SID = os.environ['TWILIO_ACCT_SID']
 TWILIO_CHAT_SID = os.environ['TWILIO_CHAT_SID']
