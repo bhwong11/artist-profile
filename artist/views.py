@@ -191,8 +191,8 @@ class ProductsCreateView(CreateView):
     
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            if request.user.profile.is_client:
+        if request.user.profile != None and request.user.is_authenticated:
+            if request.user.profile and request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')
 
@@ -302,7 +302,10 @@ class ContactView(TemplateView):
 
 class LoginView(View):
     def get(self,request):
-        return render(request,'login.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return render(request,'login.html')
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')

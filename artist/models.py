@@ -10,6 +10,7 @@ from django.db.models.fields.related import ForeignKey
 from s3direct.fields import S3DirectField
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 
 DEFAULT_USER = 1
 
@@ -22,6 +23,12 @@ class Profile(Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     #get rid of this
     MFA_code = PositiveIntegerField(default=0000)
+
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    post_save.connect(create_user_profile, sender=User)
 
 class Tag(Model):
     name = CharField(max_length=500, unique=True)
