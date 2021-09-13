@@ -10,7 +10,7 @@ Admin Login
         <h3>{{message}}</h3>
     {%endfor%}
 {%endif%}
-<a href="{% provider_login_url 'google' %}">Login Or SignUp With Google</a>
+<a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">Login Or SignUp With Google</a>
 <form action="{%url "login" %}" method="POST">
     {% csrf_token %}
     <label for="user-username">username</label>

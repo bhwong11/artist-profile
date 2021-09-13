@@ -39,7 +39,7 @@
 </form>
 {%else%}
 <h3>Login</h3>
-<a href="{% provider_login_url 'google' %}">Login Or SignUp With Google</a>
+<a href="{% provider_login_url 'google' %}?next={{request.path}}">Login Or SignUp With Google</a>
 {% comment %} login form {% endcomment %}
 <form action="{%url "login" %}" method="POST">
     {% csrf_token %}

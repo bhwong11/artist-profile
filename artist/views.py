@@ -88,7 +88,6 @@ class ArtworksView(TemplateView):
         context['form'] = ArtworkForm(initial={'title': 'foo','image':image.image})
         context['artworks'] = Artwork.objects.all()
         context['tags'] = Tag.objects.all()
-        print('TAG',tag)
         if tag != None:
             context['artworks'] = Artwork.objects.filter(tags=tag)
             return render(request,'artwork/artwork_list.html',context)
