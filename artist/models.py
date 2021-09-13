@@ -9,9 +9,10 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import ForeignKey
 from s3direct.fields import S3DirectField
 from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth import get_user_model
 
 DEFAULT_USER = 1
+
 
 class Profile(Model):
     user = OneToOneField(User, on_delete=CASCADE)

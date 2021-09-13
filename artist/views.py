@@ -81,6 +81,19 @@ class ArtworksView(TemplateView):
     template_name = 'artwork/artwork_list.html'
     form_class = ArtworkForm
 
+    def get(self,request):
+        tag = request.GET.get('tag')
+        image=Artwork.objects.get(title='h')
+        context = {}
+        context['form'] = ArtworkForm(initial={'title': 'foo','image':image.image})
+        context['artworks'] = Artwork.objects.all()
+        context['tags'] = Tag.objects.all()
+        print('TAG',tag)
+        if tag != None:
+            context['artworks'] = Artwork.objects.filter(tags=tag)
+            return render(request,'artwork/artwork_list.html',context)
+        return render(request,'artwork/artwork_list.html',context)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         image=Artwork.objects.get(title='h')
