@@ -8,7 +8,7 @@
     {{ form.media }}
 </head>
 <body>
-    <form action="{% url 'create'%}" method="post">
+    <form action="{% url 'artwork_create'%}" method="post">
         {% csrf_token %}
         {{form.as_p}}
         <button>Sumbit</button>

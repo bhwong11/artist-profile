@@ -1,0 +1,25 @@
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+#home_root{
+    margin:0;
+    height: 100vh;
+    width: 100vw;
+}
+#load-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("https://s3.us-east-2.amazonaws.com/artist-images-bhwong/s3://artist-images-bhwong/Screen%20Shot%202021-09-13%20at%203.11.15%20PM.png") no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+.load_screen__image{
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+}
