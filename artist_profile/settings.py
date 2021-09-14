@@ -53,19 +53,19 @@ INSTALLED_APPS = [
 
 from os import environ
 
-env = environ.Env()
-environ.Env.read_env()
+#env = environ.Env()
+#environ.Env.read_env()
 
 # Auth0 settings
-SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = env('SOCIAL_AUTH_AUTH0_DOMAIN')
-SOCIAL_AUTH_AUTH0_KEY = env('SOCIAL_AUTH_AUTH0_KEY')
-SOCIAL_AUTH_AUTH0_SECRET = env('SOCIAL_AUTH_AUTH0_SECRET')
-SOCIAL_AUTH_AUTH0_SCOPE = [
-    'openid',
-    'profile',
-    'email'
-]
+#SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+#SOCIAL_AUTH_AUTH0_DOMAIN = os.environ['SOCIAL_AUTH_AUTH0_DOMAIN']
+#SOCIAL_AUTH_AUTH0_KEY = os.environ['SOCIAL_AUTH_AUTH0_KEY']
+#SOCIAL_AUTH_AUTH0_SECRET = os.environ['SOCIAL_AUTH_AUTH0_SECRET']
+#SOCIAL_AUTH_AUTH0_SCOPE = [
+#    'openid',
+#    'profile',
+#    'email'
+#]
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -175,9 +175,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+from dotenv import load_dotenv
 
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+load_dotenv()
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'artist-images-bhwong'
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_ENDPOINT_URL = 'https://s3.us-east-2.amazonaws.com'
