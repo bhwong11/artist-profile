@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{% load socialaccount %}
 {%block title%}{{object.name}}{%endblock%}
 {%block content%}
 <h3>{{object.name}}</h3>
@@ -26,8 +27,19 @@
     <input type="submit" value="Logout">
 </form>
 <h3>Reviews</h3>
+{% comment %} New Review Form {% endcomment %}
+<form action="{% url 'review_new'%}" method="POST">
+    {% csrf_token %}
+    <label for="review-title">title</label>
+    <input type = "text" id = "review-title" name="title" required>
+    <label for="review-content">Content</label>
+    <textarea name="content" id="review-content" cols="30" rows="10" required></textarea>
+    <input type="hidden" name = "product" value = {{object.pk}}>
+    <input type="submit" value = "Submit Review">
+</form>
 {%else%}
 <h3>Login</h3>
+<a href="{% provider_login_url 'google' %}?next={{request.path}}">Login Or SignUp With Google</a>
 {% comment %} login form {% endcomment %}
 <form action="{%url "login" %}" method="POST">
     {% csrf_token %}
@@ -50,16 +62,6 @@
 </form>
 
 <h3>Reviews</h3>
-{% comment %} New Review Form {% endcomment %}
-<form action="{% url 'review_new'%}" method="POST">
-    {% csrf_token %}
-    <label for="review-title">title</label>
-    <input type = "text" id = "review-title" name="title">
-    <label for="review-content">Content</label>
-    <textarea name="content" id="review-content" cols="30" rows="10"></textarea>
-    <input type="hidden" name = "product" value = {{object.pk}}>
-    <input type="submit" value = "Submit Review">
-</form>
 {%endif%}
 
 {% comment %} Review List {% endcomment %}
@@ -77,9 +79,9 @@
 <form action="{% url 'review_update' review.pk %}" method="POST">
     {% csrf_token %}
     <label for="review-title">title</label>
-    <input type = "text" id = "review-title" name="title" value = "{{review.title}}">
+    <input type = "text" id = "review-title" name="title" value = "{{review.title}}" required>
     <label for="review-content">Content</label>
-    <textarea name="content" id="review-content" cols="30" rows="10">{{review.content}}</textarea>
+    <textarea name="content" id="review-content" cols="30" rows="10" required>{{review.content}}</textarea>
     <input type="submit" value = "Submit Review">
 </form>
 {%endif%}
