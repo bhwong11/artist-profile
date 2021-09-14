@@ -7,38 +7,46 @@
         padding:0;
         box-sizing:border-box;
     }
-    .container-lg{
+    .home_page__container{
         width:100vw;
         max-width:100vw;
         margin:0;
     }
-    .col-sm{
-        width:50vw;
+    .home_page__text{
+        background-color:#023047;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        color: #F0FFF0;
     }
-    .home_text{
-        background-color:#A9A9A9;
+    .home_page__link{
+        text-decoration:none;
+        color: #F0FFF0;
+    }
+    .home_page__link:hover{
+        color:#FFB703;
     }
 </style>
-<div class="container-lg w-100 m-0 p-0">
+<div class="container-lg w-100 m-0 p-0 home_page__container">
 <div class="row m-0">
-  <div class="col col-md-6 m-0 p-0 home_text">
-    one
+  <div class="col col-md-6 m-0 p-0 home_page__text">
+    <h2>Ransom Bergen Art</h2>
   </div>
   <div class="col-md-auto col-md-6 m-0 p-0">
   <img class="w-100 m-0 p-0" src="https://s3.us-east-2.amazonaws.com/artist-images-bhwong/s3://artist-images-bhwong/Screen%20Shot%202021-09-13%20at%207.42.26%20PM.png" alt="skrek image">
   </div>
 </div>
 <div class="row m-0">
-  <div class="col col-md-6 m-0 p-0">
+  <div class="col-md-auto col-md-6 m-0 p-0 order-2 order-md-1">
     <img class="w-100 m-0 p-0" src="https://s3.us-east-2.amazonaws.com/artist-images-bhwong/s3://artist-images-bhwong/Screen%20Shot%202021-09-13%20at%205.49.59%20PM.png" alt="Bill Murray image">
   </div>
-  <div class="col-md-auto col-md-6 m-0 p-0 home_text">
-    four
+  <div class="col col-md-6 m-0 p-0 home_page__text order-1 order-md-2">
+    <h2><a href="/artworks" class="home_page__link">Artwork</a></h2>
   </div>
 </div>
 <div class="row m-0">
-  <div class="col col-md-6 m-0 p-0 home_text">
-    five
+  <div class="col col-md-6 m-0 p-0 home_page__text">
+    <h2><a href="/artworks" class="home_page__link">Buy</a></h2>
   </div>
   <div class="col-md-auto col-md-6 m-0 p-0">
     <img class="col w-100 p-0" src="https://s3.us-east-2.amazonaws.com/artist-images-bhwong/s3://artist-images-bhwong/Screen%20Shot%202021-09-13%20at%205.53.17%20PM.png" alt="cat card image">
