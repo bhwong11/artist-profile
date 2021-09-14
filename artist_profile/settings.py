@@ -54,16 +54,6 @@ INSTALLED_APPS = [
 from os import environ
 
 
-# Auth0 settings
-#SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-#SOCIAL_AUTH_AUTH0_DOMAIN = os.environ['SOCIAL_AUTH_AUTH0_DOMAIN']
-#SOCIAL_AUTH_AUTH0_KEY = os.environ['SOCIAL_AUTH_AUTH0_KEY']
-#SOCIAL_AUTH_AUTH0_SECRET = os.environ['SOCIAL_AUTH_AUTH0_SECRET']
-#SOCIAL_AUTH_AUTH0_SCOPE = [
-#    'openid',
-#    'profile',
-#    'email'
-#]
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
