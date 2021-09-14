@@ -204,3 +204,8 @@ TWILIO_API_SECRET = os.environ['TWILIO_API_SECRET']
 LOGOUT_REDIRECT_URL = '/'
 TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
