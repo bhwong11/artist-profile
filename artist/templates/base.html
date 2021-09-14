@@ -44,13 +44,13 @@
             <li class="nav-item">
                 <form class="nav-link" action="{% url 'login'%}">
                     {% csrf_token %}
-                    <input class="pe-1 ps-1 navbar__client_auth" type="submit" value ='login'>
+                    <input class="pe-1 ps-1 navbar__client_auth" type="submit" value ='Login'>
                 </form>
             </li>
             <li class="nav-item">
                 <form class="nav-link" action="{% url 'logout'%}" method="POST">
                     {% csrf_token %}
-                    <input class="pe-1 ps-1 navbar__client_auth" type="submit" value ='logout'>
+                    <input class="pe-1 ps-1 navbar__client_auth" type="submit" value ='Logout'>
                 </form>
             </li>
             {%endif%}
