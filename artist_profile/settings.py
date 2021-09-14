@@ -53,8 +53,6 @@ INSTALLED_APPS = [
 
 from os import environ
 
-#env = environ.Env()
-#environ.Env.read_env()
 
 # Auth0 settings
 #SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
