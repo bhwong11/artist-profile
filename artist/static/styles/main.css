@@ -1,0 +1,42 @@
+:root {
+    --main-orange-color: #FFB703;
+    --main-textwhite-color: #F0FFF0;
+    --main-darkblue-color: #023047;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.navbar{
+    background-color: var(--main-textwhite-color);
+}
+.navbar__client_auth{
+    background-color:var(--main-textwhite-color);
+    color:rgba(0,0,0,.55);
+    border:none;
+}
+.container-fluid .navbar-brand{
+    color:var(--main-darkblue-color);
+}
+.home_page__container{
+    width:100vw;
+    max-width:100vw;
+    margin:0;
+}
+.home_page__text{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 50vh;
+    background-color:var(--main-darkblue-color);
+    color: var(--main-textwhite-color);
+}
+.home_page__link{
+    text-decoration:none;
+    color: var(--main-textwhite-color);
+}
+.home_page__link:hover{
+    color:var(--main-orange-color);
+}
