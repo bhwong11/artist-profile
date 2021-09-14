@@ -1,0 +1,1 @@
+web: gunicorn artist_profile.wsgi
