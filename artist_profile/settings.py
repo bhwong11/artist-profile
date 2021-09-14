@@ -51,8 +51,6 @@ INSTALLED_APPS = [
 
 #AUTH_USER_MODEL = 'artist.User'
 
-from os import environ
-
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -186,14 +184,15 @@ S3DIRECT_DESTINATIONS = {
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__),'static'),)
 
-TWILIO_ACCT_SID = os.environ['TWILIO_ACCT_SID']
-TWILIO_CHAT_SID = os.environ['TWILIO_CHAT_SID']
-TWILIO_SYNC_SID = os.environ['TWILIO_SYNC_SID']
-TWILIO_API_SID = os.environ['TWILIO_API_SID']
-TWILIO_API_SECRET = os.environ['TWILIO_API_SECRET']
+TWILIO_ACCT_SID = os.getenv('TWILIO_ACCT_SID')
+print(TWILIO_ACCT_SID)
+TWILIO_CHAT_SID = os.getenv('TWILIO_CHAT_SID')
+TWILIO_SYNC_SID = os.getenv('TWILIO_SYNC_SID')
+TWILIO_API_SID = os.getenv('TWILIO_API_SID')
+TWILIO_API_SECRET = os.getenv('TWILIO_API_SECRET')
 LOGOUT_REDIRECT_URL = '/'
-TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
-TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
 
 
 # Configure Django App for Heroku.
