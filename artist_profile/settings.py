@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 #AUTH_USER_MODEL = 'artist.User'
 
-import environ
+from os import environ
 
 env = environ.Env()
 environ.Env.read_env()
