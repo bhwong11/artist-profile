@@ -2,14 +2,23 @@
 {% load socialaccount %}
 {%block title%}{{object.name}}{%endblock%}
 {%block content%}
-<h3>{{object.name}}</h3>
+
+<div class="product_show__container">
+<h3 class ="products_show_page__title">{{object.name}}</h3>
 {%if user.is_authenticated%}
     {%if user.profile.isClient%}
     <a href="{% url 'product_update' object.pk%}">Update Product</a>
     <a href="{% url 'product_delete' object.pk%}">Delete Product</a>
     {%endif%}
 {%endif%}
-<img src="{{object.image}}" alt="{{object.name}}">
+<div class="product_show_page__info">
+    <img class="product_show_page__image" src="{{object.image}}" alt="{{object.name}}">
+    <div class="product_page__text">
+        <h4>Price: ${{product.price}}</h4>
+        <h5><a href="{{product.buy_link}}">Buy Link</a></h5>
+        <p>{{product.description}}</p>
+    </div>
+</div>
 {%if messages%}
     {%for message in messages%}
         <h3>{{message}}</h3>
@@ -18,6 +27,7 @@
 
 
 {%if user.is_authenticated%}
+<h3>Reviews</h3>
 <h3>{{user.username}}</h3>
 
 {% comment %} logout form {% endcomment %}
@@ -26,7 +36,6 @@
     <input type="hidden" name="product" value = {{object.pk}}>
     <input type="submit" value="Logout">
 </form>
-<h3>Reviews</h3>
 {% comment %} New Review Form {% endcomment %}
 <form action="{% url 'review_new'%}" method="POST">
     {% csrf_token %}
@@ -38,36 +47,49 @@
     <input type="submit" value = "Submit Review">
 </form>
 {%else%}
-<h3>Login</h3>
-<a href="{% provider_login_url 'google' %}?next={{request.path}}">Login Or SignUp With Google</a>
+<div class="product_show_page__auth">
+<h5>Login Or Sign Up To Leave A Review</h5>
 {% comment %} login form {% endcomment %}
-<form action="{%url "login" %}" method="POST">
+<div class="product_page__login">
+<p class="product_page_login_dropdown product_show_page_dropdown">Login &#x25BC;</p>
+<form class="product_page__login_form no_display" action="{%url "login" %}" method="POST">
     {% csrf_token %}
-    <label for="user-username">username</label>
+    <label for="user-username">Username</label>
     <input type="text" name = "username" id='user-username'>
-    <label for="user-password">username</label>
+    <label for="user-password">Password</label>
     <input type="password" name = "password" id='user-password'>
     <input type="hidden" name="product" value = {{object.pk}}>
-    <input type="submit" value = "Login">
+    <div>
+    <input class="btn" type="submit" value = "Login">
+    </div>
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+</div>
 {% comment %} Register Form {% endcomment %}
-<form action="{%url 'signup'%}" method="POST">
+<div class="product_page__login">
+<p class="product_page_signup_dropdown product_show_page_dropdown">Sign Up &#x25BC;</p>
+<form class="product_page__signup_form no_display" action="{%url 'signup'%}" method="POST">
     {% csrf_token %}
     {{user_create_from.as_p}}
     <input type="hidden" name="product" value = {{object.pk}}>
-    <input type="submit" value ="Sign Up">
+    <input class="btn" type="submit" value ="Sign Up">
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
+</div>
 
-<h3>Reviews</h3>
+<a class="google_login_link" href="{% provider_login_url 'google' %}?next={{request.path}}"><div class="google_login"><h6 class="google_login_title">Login Or Sign Up With Google</h6></div></a>
+
+</div>
 {%endif%}
 
 {% comment %} Review List {% endcomment %}
-{%for review in object.reviews.all%}
+<h3 class="review_title">Reviews</h3>
+<div class="product_page__reviews_container">
+{%for review in object.reviews.all reversed%}
 <h4>{{review.title}}</h4>
 <p>{{review.content}}</p>
+<p class="review_username">{{review.user.username}}</p>
+<hr>
 {%if review.user.username == user.username%}
 {% comment %} Delete Review {% endcomment %}
 <form action="{%url "review_delete" review.pk%}" method="POST">
@@ -89,5 +111,18 @@
 {%empty%}
 <p>No Reviews</p>
 {%endfor%}
-
+</div>
+</div>
+<script>
+    const loginDropdown = document.querySelector('.product_page_login_dropdown')
+    const signupDropdown = document.querySelector('.product_page_signup_dropdown')
+    const loginForm = document.querySelector('.product_page__login_form');
+    const signupForm = document.querySelector('.product_page__signup_form');
+    loginDropdown.addEventListener('click',function(e){
+        loginForm.classList.toggle('no_display')
+    }) 
+    signupDropdown.addEventListener('click',function(e){
+        signupForm.classList.toggle('no_display')
+    }) 
+</script>
 {%endblock%}
