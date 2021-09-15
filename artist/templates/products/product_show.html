@@ -15,7 +15,7 @@
     <img class="product_show_page__image" src="{{object.image}}" alt="{{object.name}}">
     <div class="product_page__text">
         <h4>Price: ${{product.price}}</h4>
-        <h5><a href="{{product.buy_link}}">Buy Link</a></h5>
+        <h5><a href="{{product.buy_link}}">Buy</a></h5>
         <p>{{product.description}}</p>
     </div>
 </div>
@@ -29,13 +29,13 @@
 {%if user.is_authenticated%}
 <h5 class="review_loggedin_title">Leave a Review</h5>
 <div class="reviews_loggedin_view">
-<h5>Logged In as: {{user.username}}</h5>
+<h5 class="reviews_loggedin_view_loggedin_as">Logged In as: {{user.username}}</h5>
 
 {% comment %} logout form {% endcomment %}
 <form action="{% url 'logout'%}" method="Post">
     {% csrf_token %}
     <input type="hidden" name="product" value = {{object.pk}}>
-    <input type="submit" value="Logout">
+    <input class="btn form_button_reviews" type="submit" value="Logout">
 </form>
 </div>
 {% comment %} New Review Form {% endcomment %}
@@ -44,9 +44,9 @@
     <label for="review-title">title</label>
     <input type = "text" id = "review-title" name="title" required>
     <label for="review-content">Content</label>
-    <textarea name="content" id="review-content" cols="30" rows="10" required></textarea>
+    <textarea name="content" id="review-content" cols="20" rows="5" required></textarea>
     <input type="hidden" name = "product" value = {{object.pk}}>
-    <input type="submit" value = "Submit Review">
+    <input class="btn form_button_reviews" type="submit" value = "Submit Review">
 </form>
 {%else%}
 <div class="product_show_page__auth">
@@ -94,20 +94,58 @@
 
 {%if review.user.username == user.username%}
 {% comment %} Delete Review {% endcomment %}
-<form action="{%url "review_delete" review.pk%}" method="POST">
-{% csrf_token %}
-<button>delete</button>
-</form>
 
 {% comment %} Update Review {% endcomment %}
-<form action="{% url 'review_update' review.pk %}" method="POST">
-    {% csrf_token %}
-    <label for="review-title">title</label>
-    <input type = "text" id = "review-title" name="title" value = "{{review.title}}" required>
-    <label for="review-content">Content</label>
-    <textarea name="content" id="review-content" cols="30" rows="10" required>{{review.content}}</textarea>
-    <input type="submit" value = "Submit Review">
-</form>
+<!-- Button trigger modal -->
+<div class="edit-delete-buttons-reviews">
+<a href='#' data-bs-toggle="modal" data-bs-target="#updateReviewModal">
+  Edit Review
+</a>
+<a href='#' data-bs-toggle="modal" data-bs-target="#deleteReviewModal">
+  Delete Review
+</a>
+</div>
+<!-- Modal -->
+<div class="modal fade modal_review" id="updateReviewModal" tabindex="-1" aria-labelledby="updateReviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="updateReviewModal">Update Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="review_update_form" action="{% url 'review_update' review.pk %}" method="POST">
+        {% csrf_token %}
+            <label for="review-title">Title</label>
+            <input type = "text" id = "review-title" name="title" value = "{{review.title}}" required>
+            <label for="review-content">Content</label>
+            <textarea name="content" id="review-content" cols="30" rows="10" required>{{review.content}}</textarea>
+            <input class="btn" type="submit" value = "Update Review">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal end-->
+<!-- Modal -->
+<div class="modal fade modal_review" id="deleteReviewModal" tabindex="-1" aria-labelledby="deleteReviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="deleteReviewModal">Delete Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{%url "review_delete" review.pk%}" method="POST">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="delete">
+            <a class="btn btn-info" href="#" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal end-->
 {%endif%}
 <hr>
 

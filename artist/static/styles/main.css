@@ -3,6 +3,7 @@
     --main-textwhite-color: #F0FFF0;
     --main-darkblue-color: #023047;
     --main-lightblue-color: #219EBC;
+    --main-lightestblue-color: #8ECAE6;
 }
 
 * {
@@ -16,6 +17,10 @@ body{
 a{
     color:var(--main-textwhite-color);
 }
+a:hover{
+    color:var(--main-lightestblue-color);
+}
+
 
 /* Navbar */
 .navbar{
@@ -239,21 +244,53 @@ a{
     display:flex;
     justify-content: flex-start;
     width: 600px;
-    margin: 0px 10px;
+    margin: 10px 0px;
 }
+.reviews_loggedin_view_loggedin_as{
+    padding-right:10px;
+    margin-bottom:0;
+    display: flex;
+    align-items: center;
+}
+.form_button_reviews{
+    background-color:var(--main-lightblue-color);
+    color:var(--main-textwhite-color);
+    border:none;
+}
+
 .review_new_form{
     width: 600px;
     display:grid;
 }
-.review_new_form input{
+.review_new_form input,.review_update_form input{
     border: 1px solid #ced4da;
     border-radius: .25rem;
 }
-.review_new_form textarea{
+.review_new_form input[type="submit"]{
+    border:none;
+    margin-top:5px;
+}
+.review_new_form textarea,.review_update_form textarea{
     border: 1px solid #ced4da;
     border-radius: .25rem;
 }
 
+.review_update_form{
+    display: grid;
+    color:var(--main-darkblue-color);
+}
+.review_update_form input[type="submit"]{
+    border:none;
+    margin-top:5px;
+    background-color:var(--main-lightblue-color);
+    color:var(--main-textwhite-color);
+}
+.modal-title{
+    color:var(--main-darkblue-color);
+}
+.edit-delete-buttons-reviews *{
+    padding:5px;
+}
 
 
 /* BLOGS PAGE */
