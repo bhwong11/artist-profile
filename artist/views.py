@@ -83,11 +83,13 @@ class ArtworksView(TemplateView):
 
     def get(self,request):
         tag = request.GET.get('tag')
-        image=Artwork.objects.get(title='h')
         context = {}
-        context['form'] = ArtworkForm(initial={'title': 'foo','image':image.image})
         context['artworks'] = Artwork.objects.all()
         context['tags'] = Tag.objects.all()
+        allCats = []
+        for artwork in context['artworks']:
+            allCats.append(artwork.catergory)
+        context['categories'] = set(allCats)
         if tag != None:
             context['artworks'] = Artwork.objects.filter(tags=tag)
             return render(request,'artwork/artwork_list.html',context)
@@ -95,9 +97,6 @@ class ArtworksView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        image=Artwork.objects.get(title='h')
-        print(image.image)
-        context['form'] = ArtworkForm(initial={'title': 'foo','image':image.image})
         context['artworks'] = Artwork.objects.all()
         return context
 
@@ -225,6 +224,9 @@ class DeleteProductView(DeleteView):
         return redirect('/unauthorized/')
 
 class ReviewsCreateView(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
+        
     def post(self,request):
         if request.user:
             title = request.POST.get('title')
@@ -243,7 +245,6 @@ class ReviewsCreateView(View):
         else:
             product = request.POST.get('product')
             return redirect(f'/products/{product}')
-
 
 
 class ReviewsUpdateView(View):
@@ -355,7 +356,7 @@ class MFAloginView(View):
 
     def post(self,request):
         recieved_code = request.POST.get('code')
-        print('317 REC CODE',recieved_code)
+        print('RECIEVE CODE',recieved_code)
         print('Correct Code',request.session['mfa_code'])
         if str(recieved_code) == request.session['mfa_code']:
             print("MFA LOGIN!!")
@@ -390,6 +391,8 @@ class LogoutView(View):
     def post(self,request):
         product_pk = request.POST.get('product')
         logout(request)
+        if product_pk==None:
+            return redirect('/')
         return redirect(f'/products/{product_pk}')
 
 class SignupView(View):

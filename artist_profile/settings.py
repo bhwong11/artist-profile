@@ -185,7 +185,6 @@ S3DIRECT_DESTINATIONS = {
 #STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__),'static'),)
 
 TWILIO_ACCT_SID = os.getenv('TWILIO_ACCT_SID')
-print(TWILIO_ACCT_SID)
 TWILIO_CHAT_SID = os.getenv('TWILIO_CHAT_SID')
 TWILIO_SYNC_SID = os.getenv('TWILIO_SYNC_SID')
 TWILIO_API_SID = os.getenv('TWILIO_API_SID')

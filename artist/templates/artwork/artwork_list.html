@@ -2,7 +2,7 @@
 
 {%block title%}artworks{%endblock%}
 {%block content%}
-<style>
+{% comment %}<style>
 .file-input{
     background-color:aqua;
     padding:50px;
@@ -33,13 +33,14 @@
   display: block;
 }
 .dropdown:hover .dropdown-content {display: block;}
-</style>
+</style>{% endcomment %}
     <div class="dropdown">
-    <button class="dropbtn">Dropdown</button>
+    <div class="dropbtn">Tags</div>
         <div class="dropdown-content">
         {%for tag in tags.all%}
             <a href='?tag={{tag.pk}}'>{{tag.name}}</a>
         {%endfor%}
+        <a href='/artworks'>all</a>
         </div>
     </div>
 
@@ -50,18 +51,49 @@
     <input type="submit" value ="submit">
     
     </form>{% endcomment %}
-    <a href="{%url 'tag_new'%}">create tag</a>
+    {%if request.user.is_authenticated%}
+      {%if request.user.profile.is_client%}
+        <a href="{%url 'tag_new'%}">create tag</a>
+        <a href="{%url 'artwork_create'%}">create artwork</a>
+      {%endif%}
+    {%endif%}
+
+    <div class="artwork_container">
+    {%for catergory in categories%}
     {%for artwork in artworks%}
+    {%if artwork.catergory == catergory%}
+    <div class="artwork_container__wrapper">
+    <div class="artwork_wrapper__top">
     <h3>{{artwork.title}}</h3>
-    <a href="{%url 'artwork_update' artwork.pk%}">Update</a>
-    <a href="{%url 'artwork_delete' artwork.pk%}">Delete</a>
-    <img src="{{artwork.image}}" alt="{{artwork.title}}">
+    {%if request.user.is_authenticated%}
+      {%if request.user.profile.is_client%}
+      <a href="{%url 'artwork_update' artwork.pk%}">Update</a>
+      <a href="{%url 'artwork_delete' artwork.pk%}">Delete</a>
+      {%endif%}
+    {%endif%}
+    </div>
+    <img class="artwork_container__image" src="{{artwork.image}}" alt="{{artwork.title}}">
+    <div class="artwork_wrapper__bottom">
+    <p>Catergory: {{artwork.catergory}}</p>
+    <p>tag:
     {%for tag in artwork.tags.all%}
     {{tag.name}}
     {%empty%}
     <p>No Tags Assigned</p>
     {%endfor%}
+    </p>
+    <p>{{artwork.description}}</p>
+    </div>
+    </div>
+    {%endif%}
+    {%endfor%}
 
     {%endfor%}
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone-amd-module.js" integrity="sha512-4p9OjnfBk18Aavg91853yEZCA7ywJYcZpFt+YB+p+gLNPFIAlt2zMBGzTxREYh+sHFsttK0CTYephWaY7I3Wbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    const allImages = document.querySelectorAll('img')
+    const allTopContainer = document.querySelectorAll('.artwork_wrapper__top')
+    const allBottomContainer = document.querySelectorAll('.artwork_wrapper__bottom')
+    </script>
 {%endblock%}
