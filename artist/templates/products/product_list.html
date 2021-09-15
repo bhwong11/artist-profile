@@ -8,7 +8,7 @@
       {%endif%}
     {%endif%}
 <div class="products_container">
-{%for product in object_list%}
+{%for product in object_list reversed%}
 <div class="card products_container__wrapper" style="width: 18rem;">
   <img class="card-img-top" src="{{product.image}}" alt="{{product.name}} image">
   <div class="card-body">

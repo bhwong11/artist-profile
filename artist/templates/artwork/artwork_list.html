@@ -61,7 +61,7 @@
 
     <div class="artwork_container">
     {%for catergory in categories%}
-    {%for artwork in artworks%}
+    {%for artwork in artworks reversed%}
     {%if artwork.catergory == catergory%}
     <div class="artwork_container__wrapper">
     <div class="artwork_wrapper__top">

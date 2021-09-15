@@ -1,12 +1,25 @@
 {%extends 'base.html'%}
 {%block title%}Blogs{%endblock%}
 {%block content%}
-<h3>Blogs</h3>
+<h2 class ="blogs_page__title">Blogs</h2>
+{%if request.user.is_authenticated%}
+{%if request.user.profile.is_client%}
 <a href="{% url 'blog_new'%}">Create</a>
-{%for blog in object_list%}
-<h3>{{blog.title}}</h3>
-<p>{{blog.content}}</p>
+{%endif%}
+{%endif%}
+<div class="blog_container">
+{%for blog in object_list reversed%}
+<div class="blog_container__wrapper">
+<h3 class ="blogs_page__blog_title">{{blog.title}}</h3>
+<p class ="blogs_page__blog_content">{{blog.content }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, quidem eaque ducimus nemo, ullam quaerat, odio quo magni vitae itaque excepturi blanditiis quae consequuntur soluta non nihil veritatis culpa inventore?</p>
+<p>{{blog.user.username}}</p>
+{%if request.user.is_authenticated%}
+{%if request.user.profile.is_client%}
 <a href="{% url 'blog_update' blog.pk%}">Update</a>
 <a href="{% url 'blog_delete' blog.pk%}">Delete</a>
+{%endif%}
+{%endif%}
+</div>
 {%endfor%}
+</div>
 {%endblock%}
