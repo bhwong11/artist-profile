@@ -206,13 +206,6 @@ a{
 .product_page__text{
     padding:10px;
 }
-.review_title{
-    margin:30px 10px 10px 10px;
-}
-.review_username{
-    display:flex;
-    justify-content: flex-end;
-}
 .google_login{
     display:flex;
     justify-content: center;
@@ -229,6 +222,38 @@ a{
 .google_login_title{
     margin:5px;
 }
+.review_title{
+    margin:30px 10px 10px 10px;
+}
+.review_username{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.reviews_loggedin_view{
+    display:flex;
+    justify-content: flex-start;
+    width: 600px;
+}
+.review_loggedin_title{
+    display:flex;
+    justify-content: flex-start;
+    width: 600px;
+    margin: 0px 10px;
+}
+.review_new_form{
+    width: 600px;
+    display:grid;
+}
+.review_new_form input{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.review_new_form textarea{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
 
 
 /* BLOGS PAGE */

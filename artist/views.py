@@ -262,6 +262,8 @@ class ReviewsUpdateView(View):
         return redirect(f'/products/{review.product.pk}')
 
 class ReviewsDeleteView(View):
+    def get(self,request,pk):
+        return redirect(f'/products/{pk}')
     def post(self,request,pk):
         review = Review.objects.get(pk=pk)
         if not request.user.pk == Review.objects.get(pk=pk).user.pk:

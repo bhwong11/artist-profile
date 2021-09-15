@@ -27,8 +27,9 @@
 
 
 {%if user.is_authenticated%}
-<h3>Reviews</h3>
-<h3>{{user.username}}</h3>
+<h5 class="review_loggedin_title">Leave a Review</h5>
+<div class="reviews_loggedin_view">
+<h5>Logged In as: {{user.username}}</h5>
 
 {% comment %} logout form {% endcomment %}
 <form action="{% url 'logout'%}" method="Post">
@@ -36,8 +37,9 @@
     <input type="hidden" name="product" value = {{object.pk}}>
     <input type="submit" value="Logout">
 </form>
+</div>
 {% comment %} New Review Form {% endcomment %}
-<form action="{% url 'review_new'%}" method="POST">
+<form class="review_new_form" action="{% url 'review_new'%}" method="POST">
     {% csrf_token %}
     <label for="review-title">title</label>
     <input type = "text" id = "review-title" name="title" required>
@@ -89,7 +91,7 @@
 <h4>{{review.title}}</h4>
 <p>{{review.content}}</p>
 <p class="review_username">{{review.user.username}}</p>
-<hr>
+
 {%if review.user.username == user.username%}
 {% comment %} Delete Review {% endcomment %}
 <form action="{%url "review_delete" review.pk%}" method="POST">
@@ -107,6 +109,7 @@
     <input type="submit" value = "Submit Review">
 </form>
 {%endif%}
+<hr>
 
 {%empty%}
 <p>No Reviews</p>
