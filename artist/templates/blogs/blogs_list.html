@@ -11,7 +11,20 @@
 {%for blog in object_list reversed%}
 <div class="blog_container__wrapper">
 <h3 class ="blogs_page__blog_title">{{blog.title}}</h3>
-<p class ="blogs_page__blog_content">{{blog.content }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, quidem eaque ducimus nemo, ullam quaerat, odio quo magni vitae itaque excepturi blanditiis quae consequuntur soluta non nihil veritatis culpa inventore?</p>
+    {% with text=blog.content %}
+        {% if text|wordcount > 10 %}
+    <p class="half-content" id="half-{{ blog.pk }}">
+    {{text|truncatewords:10}}
+    <a data-id="{{ blog.pk }}" href="#" class="show-hide-btn"><br>Read more</a></p>
+
+    <p class="full-content" id="full-{{blog.pk }}" style="display: none;">{{ text }}<a data-id="{{ blog.pk}}" href="#" class="show-hide-btn">Read less</a></p>
+    {% else %}
+        <p>
+    {{ text|safe|linebreaks }}
+    </p>
+    {% endif %}
+    {% endwith %}
+{% comment %}<p class ="blogs_page__blog_content">{{blog.content }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, quidem eaque ducimus nemo, ullam quaerat, odio quo magni vitae itaque excepturi blanditiis quae consequuntur soluta non nihil veritatis culpa inventore?</p>{% endcomment %}
 <p>{{blog.user.username}}</p>
 {%if request.user.is_authenticated%}
 {%if request.user.profile.is_client%}
@@ -22,4 +35,14 @@
 </div>
 {%endfor%}
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".show-hide-btn").click(function() {
+    var id = $(this).data("id");
+    $("#half-" + id).toggle();//hide/show..
+    $("#full-" + id).toggle();
+  })
+})
+</script>
 {%endblock%}
