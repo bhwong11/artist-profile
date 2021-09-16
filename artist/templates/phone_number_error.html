@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%block title%}
+Phone Number Error
+{%endblock%}
+{%block content%}
+<div class="auth_error_container">
+    <h2 class="error_message auth_error">There is No Phone Number for this account, contact your website administrator to resolve this issue</h2>
+    <a class = "btn client_side_form_submit" href="{%url 'login'%}">Back to Login</a>
+</div>
+{%endblock%}

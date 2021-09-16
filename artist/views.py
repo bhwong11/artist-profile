@@ -315,6 +315,8 @@ class LoginView(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.profile.is_client == True:
+                if user.profile.phone_number == '':
+                    return render(request,'phone_number_error.html')
                 request.session['username'] = username
                 request.session['password']= password
                 request.session['mfa_code'] = randomCodeGenerator() or 'adjfas;dlfasd'
@@ -374,10 +376,12 @@ class MFAloginView(View):
 class MFAnewcode(View):
     def post(self,request):
         request.session['mfa_code'] = randomCodeGenerator()
-        print('HIT ROute',request.session['mfa_code'])
         username = request.session.get('username')
         password = request.session.get('password')
         user = authenticate(request, username=username, password=password)
+        if user == None or user.profile.phone_number == None:
+            messages.add_message(request, messages.WARNING, 'There is no Phone Number for this account, contact your website administrator')
+            return redirect('/mfalogin')
         if user.profile.is_client:
             client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
             client.messages.create(to=user.profile.phone_number,
