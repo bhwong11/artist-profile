@@ -3,9 +3,12 @@
 update {{artwork.title}}
 {%endblock%}
 {%block content%}
-<form action="{% url 'artwork_update' artwork.pk %}" method="POST">
-{% csrf_token %}
-{{form.as_p}}
-<input type="submit" value="update">
-</form>
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action="{% url 'artwork_update' artwork.pk %}" method="POST">
+    <h3>Update {{artwork.title}}</h3>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn client_side_form_submit" type="submit" value="update">
+    </form>
+</div>
 {%endblock%}

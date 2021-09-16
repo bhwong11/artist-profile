@@ -4,11 +4,13 @@ Create Blog
 {%endblock%}
 
 {%block content%}
-<h3>Create A new Blog</h3>
- <form action="{% url 'blog_new'%}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="submit">
-</form>   
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action="{% url 'blog_new'%}" method="post">
+        <h3>Create A new Blog</h3>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="btn client_side_form_submit" type="submit" value="submit">
+    </form>
+</div>
 
 {%endblock%}

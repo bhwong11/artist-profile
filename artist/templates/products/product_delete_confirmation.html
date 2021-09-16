@@ -3,10 +3,14 @@
 Delete Confirmation
 {%endblock%}
 {%block content%}
-<h3>Are you sure you want to delete {{product.name}}?</h3>
-<form action = "{% url 'product_delete' product.pk%}" method="post">
-{% csrf_token %}
-<a href="{% url 'product_show' product.pk%}">cancel</a>
-<input type="submit" value ="Delete">
-</form>
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action = "{% url 'product_delete' product.pk%}" method="post">
+        <h3>Are you sure you want to delete {{product.name}}?</h3>
+        {% csrf_token %}
+        <div>
+        <input class="btn btn-danger" type="submit" value ="Delete">
+        <a class="btn btn-warning" href="{% url 'product_show' product.pk%}">cancel</a>
+        </div>
+    </form>
+</div>
 {%endblock%}

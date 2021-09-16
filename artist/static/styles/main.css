@@ -21,6 +21,12 @@ a:hover{
     color:var(--main-lightestblue-color);
 }
 
+.error_message{
+    margin:10px;
+    width:600px;
+    color:var(--main-orange-color);
+}
+
 
 /* Navbar */
 .navbar{
@@ -105,15 +111,6 @@ a:hover{
 }
 
 /* drop down tags */
-.file-input{
-    background-color:aqua;
-    padding:50px;
-    text-align: center;
-}
-.file-input:hover{
-    background-color:blue;
-}
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -321,7 +318,36 @@ a:hover{
     word-wrap: break-word;
 }
 
-
+.client_side_form_wrapper{
+    width:100vw;
+    display:flex;
+    justify-content: space-evenly;
+}
+.client_side_form{
+    display: grid;
+    margin: 10px;
+    padding:10px;
+    width:540px;
+    color:var(--main-textwhite-color);
+    background-color: var(--main-lightblue-color);
+    border-radius: 5px;
+}
+.client_side_form p{
+    display: grid;
+}
+.client_side_form p input{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.client_side_form p textarea{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.client_side_form_submit{
+    border:none;
+    background-color:var(--main-darkblue-color);
+    color:var(--main-textwhite-color);
+}
 
 @media only screen and (max-width: 760px){
     .artwork_container__wrapper:hover{

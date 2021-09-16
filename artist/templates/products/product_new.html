@@ -3,9 +3,12 @@
 create product
 {%endblock%}
 {%block content%}
-<form method="POST" action="{% url 'product_new'%}">
+<div class="client_side_form_wrapper">
+<form class="client_side_form" method="POST" action="{% url 'product_new'%}">
+<h3>Create Product</h3>
 {% csrf_token %}
 {{form.as_p}}
-<input type="submit" value="submit">
+<input class="btn client_side_form_submit" type="submit" value="submit">
 </form>
+</div>
 {%endblock%}

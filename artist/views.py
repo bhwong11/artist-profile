@@ -344,13 +344,13 @@ class LoginView(View):
             login(request, user)
             if product_pk is None:
                 return redirect('/')
-            return redirect(f'/products/{product_pk}')
+            return redirect(f'/products/{product_pk}#login')
 
         else:
             messages.add_message(request, messages.WARNING, 'The Username or Password was Incorrect')
             if product_pk is None:
                 return redirect('/login/')
-            return redirect(f'/products/{product_pk}')
+            return redirect(f'/products/{product_pk}#login')
 
 class MFAloginView(View):
     def get(self,request):

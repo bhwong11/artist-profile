@@ -4,11 +4,15 @@
 {%endblock%}
 
 {%block content%}
-<h3>Are you sure you want to delete {{blog.name}}</h3>
-<form action="{%url 'blog_delete' blog.pk%}" method="POST">
-{% csrf_token %}
-{{form.as_p}}
-<input type="submit" value="delete"> 
-<a href="{%url 'blogs'%}">cancel</a>
-</form>
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action="{%url 'blog_delete' blog.pk%}" method="POST">
+    <h3>Are you sure you want to delete {{blog.name}}</h3>
+        {% csrf_token %}
+        {{form.as_p}}
+        <div>
+            <input class="btn btn-danger" type="submit" value="delete"> 
+            <a class="btn btn-warning" href="{%url 'blogs'%}">cancel</a>
+        </div>
+    </form>
+</div>
 {%endblock%}

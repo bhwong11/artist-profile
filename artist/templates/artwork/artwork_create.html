@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {{ form.media }}
-</head>
-<body>
-    <form action="{% url 'artwork_create'%}" method="post">
+{%extends 'base.html'%}
+{%block title%}
+Create Artwork
+{%endblock%}
+{%block content%}
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action="{% url 'artwork_create'%}" method="post">
+    <h3>Create New Artwork</h3>
         {% csrf_token %}
         {{form.as_p}}
-        <button>Sumbit</button>
+        <input class="btn client_side_form_submit" type="submit" value="Create">
     </form>
-</html>
+</div>
+{%endblock%}
