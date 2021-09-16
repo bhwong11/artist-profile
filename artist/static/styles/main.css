@@ -349,6 +349,24 @@ a:hover{
     color:var(--main-textwhite-color);
 }
 
+/* TAGS PAGE */
+.tags_page_title{
+    padding:3px 10px;
+    color:var(--main-textwhite-color);
+}
+.tag_container{
+    width:100vw;
+    display:flex;
+    justify-content:center;
+}
+.tag_wrapper{
+    background-color:var(--main-lightblue-color);
+    color:var(--main-textwhite-color);
+    padding: 20px;
+    border-radius: 5px;
+    width:600px;
+}
+
 @media only screen and (max-width: 760px){
     .artwork_container__wrapper:hover{
         transform: scale(1.0); 
