@@ -1,3 +1,10 @@
+:root {
+  --main-orange-color: #FFB703;
+  --main-textwhite-color: #F0FFF0;
+  --main-darkblue-color: #023047;
+  --main-lightblue-color: #219EBC;
+  --main-lightestblue-color: #8ECAE6;
+}
 * {
     box-sizing:border-box;
   }
@@ -8,39 +15,35 @@
     height:100%;
     width:100%;
     color:#dedede;
-    background-color: #849091;
+    background-color: var(--main-darkblue-color);
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
   }
   
-  header {
-    width:100%;
-    position:absolute;
-    text-align:center;
-    bottom:20px;
+  /* Navbar */
+  .navbar{
+    background-color: var(--main-textwhite-color);
   }
-  
-  header a, header a:visited {
-    font-size:18px;
-    color:#dedede;
-    text-decoration:none;
+  .navbar__client_auth{
+    background-color:var(--main-textwhite-color);
+    color:rgba(0,0,0,.55);
+    border:none;
   }
-  
-  header a:hover {
-    text-decoration:underline;
+  .container-fluid .navbar-brand{
+    color:var(--main-darkblue-color);
   }
-  
+
   section {
     height:70%;
-    background-color:#2B2B2A;
+    width:100vw;
+    display:flex;
+    justify-content: space-evenly;
   }
   
-  section input {
+  .chat_bottom input{
     display:block;
-    height:52px;
-    width:800px;
+    width:540px;
     margin:10px auto;
     outline:none;
-    background-color:transparent;
     border:none;
     border-bottom:1px solid #2B2B2A;
     padding:0;
@@ -52,14 +55,18 @@
     background-color:#232323;
     padding:10px;
     height:100%;
-    width:800px;
+    width:540px;
     margin:0 auto;
-    overflow-y:auto;
+    overflow-y: auto;
   }
   
   #messages p {
     margin:5px 0;
     padding:0;
+  }
+
+  #leave_chat{
+
   }
   
   .info {
@@ -87,4 +94,12 @@
   .message-container .username.me {
     display:inline-block;
     margin-right:5px;
+  }
+
+  .chat_messages_input{
+    display: grid;
+    margin-top: 20px;
+    padding: 30px;
+    background-color: var(--main-lightblue-color);
+    border-radius: 5px;
   }

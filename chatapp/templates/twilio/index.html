@@ -2,17 +2,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Twilio Chat Quickstart</title>
-    <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
+    <title>Ransom Bergen Artist Chat</title>
+    <link rel="shortcut icon" href="https://s3.us-east-2.amazonaws.com/artist-images-bhwong/s3://artist-images-bhwong/Screen%20Shot%202021-09-13%20at%203.04.38%20PM-trimmy_preview_rev_1.png">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'twilio/index.css' %}">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Ransom Bergen Art</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/artworks">Artwork</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">Buy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/blogs">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        {%if request.user.is_authenticated%}
+            {%if user.profile.is_client%}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile_show' user.profile.pk%}">Show/Edit Phone Number</a>
+            </li>
+            <li class="nav-item">
+                <form class="nav-link" action="{% url 'logout'%}" method="POST">
+                    {% csrf_token %}
+                    <input class="pe-1 ps-1 navbar__client_auth" type="submit" value ='logout'>
+                </form>
+            </li>
+            {%endif%}
+        {%endif%}
+      </ul>
+    </div>
+  </div>
+</nav>
 
   <section>
+  <div class="chat_messages_input">
     <div id="messages"></div>
+    <div class="chat_bottom">
     <input id="chat-input" type="text" placeholder="say anything" autofocus/>
     <div id = "leave_chat">Leave Chat</div>
+    </div>
+  </div>
   </section>
 
   <script src="https://media.twiliocdn.com/sdk/js/chat/releases/4.0.0/twilio-chat.js"></script>

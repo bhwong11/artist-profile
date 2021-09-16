@@ -321,6 +321,8 @@ a:hover{
     word-wrap: break-word;
 }
 
+
+
 @media only screen and (max-width: 760px){
     .artwork_container__wrapper:hover{
         transform: scale(1.0); 
