@@ -449,6 +449,7 @@ input.auth_form_submit{
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 10px;
 }
 .social_icons{
     grid-column: 1 / -1;
