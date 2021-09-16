@@ -3,7 +3,12 @@
 Title
 {%endblock%}
 {%block content%}
-<h3>{{user.username}}</h3>
-<p>{{user.profile.phone_number}}</p>
-<a href="{%url 'profile_update' user.profile.pk%}">update PK</a>
+<div class="profile_page_container">
+    <div class="profile_page_wrapper">
+        <h3>{{user.username}}</h3>
+        <p>Phone Number: {{user.profile.phone_number}}</p>
+        <a class="btn profile_page_update" href="{%url 'profile_update' user.profile.pk%}">update Phone Number</a>
+    </div>
+</div>
+
 {%endblock%}

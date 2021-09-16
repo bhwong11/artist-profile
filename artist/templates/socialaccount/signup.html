@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%block title%}
+social sign up
+{%endblock%}
+{%block content%}
+<div class="auth_error_container">
+    <h2 class="error_message auth_error">An Account with That Email Already Exist, Please Try Another Account</h2>
+    <a class = "btn client_side_form_submit" href="{%url 'login'%}">Back to Login</a>
+</div>
+{%endblock%}
