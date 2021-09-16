@@ -1,14 +1,10 @@
-{% extends 'base.html' %} 
+{%extends 'base.html'%}
 {%block title%}
-Login
+ Login Redirect
 {%endblock%}
-
-{% block content %}
-<h1 class="title">Log In!!!</h1>
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" class="btn" value="login" />
-  <input type="hidden" name="next" value="{{next }}" />
-</form>
-
-{% endblock %}
+{%block content%}
+<h3 class="auth_title">Redirecting...</h3>
+<script>
+window.location.replace("/");
+</script>
+{%endblock%}

@@ -10,7 +10,6 @@ Admin Login
     {%endfor%}
 {%endif%}
 <div class="client_side_form_wrapper">
-
 <form class="client_side_form auth_form" action="{%url "login" %}" method="POST">
     {% csrf_token %}
     <h3>Admin/User Login</h3>

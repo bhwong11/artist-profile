@@ -189,7 +189,7 @@ class ProductsCreateView(CreateView):
     
     #check if user is client will send to hompage if not
     def dispatch(self, request, *args, **kwargs):
-        if request.user.profile != None and request.user.is_authenticated:
+        if request.user.is_authenticated:
             if request.user.profile and request.user.profile.is_client:
                 return super().dispatch(request, *args, **kwargs)
         return redirect('/unauthorized/')

@@ -391,6 +391,9 @@ a:hover{
     background-color:var(--main-darkblue-color);
     color:var(--main-textwhite-color);
 }
+.auth_title{
+    color:var(--main-textwhite-color);
+}
 
 .auth_error_container{
     display: flex;
@@ -415,6 +418,45 @@ a:hover{
 input.auth_form_submit{
     margin: 5px 0;
     border:none;
+}
+
+/* CONTACT PAGE */
+.contact_page__title{
+    padding:3px 10px;
+    color:var(--main-textwhite-color);
+}
+
+.contact_page_container{
+    display:flex;
+    justify-content: center;
+    width:100vw;
+}
+.contact_page_wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    background-color: var(--main-lightblue-color);
+    color:var(--main-textwhite-color);
+}
+.image_wrapper img{
+    width:100%;
+    border-radius: 5px;
+}
+.contact_page__text{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.social_icons{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content:center;
+}
+.social_icons a{
+    padding: 8px;
 }
 
 @media only screen and (max-width: 600px){

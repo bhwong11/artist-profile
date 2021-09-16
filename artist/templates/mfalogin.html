@@ -3,21 +3,27 @@
 MFA Login
 {%endblock%}
 {%block content%}
-{%if messages%}
+<div class="client_side_form_wrapper">
+<form class="client_side_form auth_form" action="{%url 'mfalogin'%}" method="POST">
+    {%if messages%}
     {%for message in messages%}
-        <h3>{{message}}</h3>
+        <h3 class="error_message">{{message}}</h3>
     {%endfor%}
-{%endif%}
-<form action="{%url 'mfalogin'%}" method="POST">
+    {%endif%}
     {% csrf_token %}
+    <h3>A code was sent to your phone, please enter it here</h3>
     <label for="code">enter code</label>
     <input type="text" name="code" id="code">
-    <input type="submit" value="submit">
+    <input class="btn auth_form_submit client_side_form_submit" type="submit" value="submit">
+    <h2>Code will expire after 1 minute</h2>
 </form>
-<h3>Code will expire after 1 minute</h3>
+</div>
 
+<div class="client_side_form_wrapper">
 <form action="{% url 'newmfacode'%}" method="POST">
     {% csrf_token %}
-    <input type="submit" value = "resend code">
+    <input class="btn btn-outline-warning" type="submit" value = "resend code">
 </form>
+</div>
+
 {%endblock%}
