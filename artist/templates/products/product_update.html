@@ -6,8 +6,8 @@
 
 
 <div class="client_side_form_wrapper">
-    <h3>Update {{product.name}}</h3>
     <form class="client_side_form" action = "{%url 'product_update' product.pk %}" method="POST">
+        <h3>Update {{product.name}}</h3>
         {% csrf_token %}
         {{form.as_p}}
         <input class="btn client_side_form_submit" type="submit" value="submit">

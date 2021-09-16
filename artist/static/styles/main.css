@@ -23,7 +23,10 @@ a:hover{
 
 .error_message{
     margin:10px;
-    width:600px;
+    max-width:600px;
+    color:var(--main-orange-color);
+}
+.errorlist li{
     color:var(--main-orange-color);
 }
 
@@ -403,6 +406,15 @@ a:hover{
 .auth_error_container h2{
     max-width:100%;
     word-wrap: break-word;
+}
+.auth_form input{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+input.auth_form_submit{
+    margin: 5px 0;
+    border:none;
 }
 
 @media only screen and (max-width: 600px){
