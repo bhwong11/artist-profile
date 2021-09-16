@@ -248,6 +248,9 @@ class ReviewsCreateView(View):
 
 
 class ReviewsUpdateView(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
+
     def post(self,request,pk):
         title = request.POST.get('title')
         content = request.POST.get('content')
@@ -374,6 +377,9 @@ class MFAloginView(View):
             return redirect('/mfalogin')
 
 class MFAnewcode(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
+
     def post(self,request):
         request.session['mfa_code'] = randomCodeGenerator()
         username = request.session.get('username')
@@ -394,6 +400,9 @@ class MFAnewcode(View):
 
 
 class LogoutView(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
+
     def post(self,request):
         product_pk = request.POST.get('product')
         logout(request)
@@ -402,6 +411,9 @@ class LogoutView(View):
         return redirect(f'/products/{product_pk}')
 
 class SignupView(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
+
     def post(self,request):
         product_pk = request.POST.get('product')
         form = UserCreationForm(request.POST)
@@ -435,6 +447,8 @@ class HomerenderView(APIView):
         return Response({'profiles': queryset})
 
 class ChangeFMACode(View):
+    def get(self,request):
+        return redirect('/unauthorized/')
     def post(self,request):
         request.session['mfa_code'] = randomCodeGenerator()
         return redirect('/mfalogin/')
