@@ -75,10 +75,10 @@ $(function() {
     //CUSTOM FUNCTIONS
     $.getJSON('/chat/userJoin',function(data){
       if(data.isInChat==='true'){
-        return print('<h3 style="color:aqua;">Admin is in Chat</h3>',true)
+        return print('<h5 style="color:aqua;">Admin is in Chat</h5>',true)
       }
       if(data.isInChat==='false'){
-        return print('<h3 style="color:red;">Admin is not in Chat, Please come back later!</h3>',true)
+        return print('<h5 style="color:red;">Admin is not in Chat, Please come back later!</h5>',true)
       }
     })
 
