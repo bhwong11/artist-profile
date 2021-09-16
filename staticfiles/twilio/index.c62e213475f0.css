@@ -1,0 +1,112 @@
+:root {
+  --main-orange-color: #FFB703;
+  --main-textwhite-color: #F0FFF0;
+  --main-darkblue-color: #023047;
+  --main-lightblue-color: #219EBC;
+  --main-lightestblue-color: #8ECAE6;
+}
+* {
+    box-sizing:border-box;
+  }
+  
+  html, body {
+    padding:0;
+    margin:0;
+    height:100%;
+    width:100%;
+    color:var(--main-lightblue-color);
+    background-color: var(--main-darkblue-color);
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar{
+    background-color: var(--main-textwhite-color);
+  }
+  .navbar__client_auth{
+    background-color:var(--main-textwhite-color);
+    color:rgba(0,0,0,.55);
+    border:none;
+  }
+  .container-fluid .navbar-brand{
+    color:var(--main-darkblue-color);
+  }
+
+  section {
+    height:70%;
+    width:100vw;
+    display:flex;
+    justify-content: space-evenly;
+  }
+  
+  .chat_bottom input{
+    display:block;
+    width:540px;
+    margin:10px auto;
+    outline:none;
+    border:none;
+    border-bottom:1px solid #2B2B2A;
+    padding:0;
+    font-size:20px;
+    background-color: transparent;
+    color:#eee;
+  }
+  
+  #messages {
+    background-color:var(--main-textwhite-color);
+    padding:10px;
+    height:90%;
+    width:540px;
+    margin:0 auto;
+    overflow-y: auto;
+  }
+  
+  #messages p {
+    margin:5px 0;
+    padding:0;
+  }
+
+  #leave_chat{
+    cursor: pointer;
+    background-color:var(--main-darkblue-color);
+    color:var(--main-textwhite-color);
+    border:none;
+  }
+  
+  .info {
+    margin:5px 0;
+    font-style:italic;
+  }
+  
+  .message-container {
+    margin:5px 0;
+    color:var(--main-lightblue-color);
+  }
+  
+  .message-container .username {
+    display:inline-block;
+    margin-right:5px;
+    font-weight:bold;
+    color:#849091;
+  }
+  
+  .me, .username.me {
+    font-weight:bold;
+    color:cyan;
+  }
+  
+  .message-container .username.me {
+    display:inline-block;
+    margin-right:5px;
+  }
+
+  .chat_messages_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--main-lightblue-color);
+    border-radius: 5px;
+    height:80vh;
+  }
