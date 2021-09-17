@@ -319,7 +319,6 @@ class LoginView(View):
         if user is not None:
             if user.profile.is_client == True:
                 if user.profile.phone_number == '':
-                    print('HIT LOGIn')
                     return render(request,'phone_number_error.html')
                 request.session['username'] = username
                 request.session['password']= password
@@ -344,8 +343,6 @@ class LoginView(View):
                 print(timer)
                 timer.start()
                     
-
-                print('IS CLIENTDFAS!!')
                 return redirect('/mfalogin/')
             login(request, user)
             if product_pk is None:
@@ -416,7 +413,6 @@ class SignupView(View):
         return redirect('/unauthorized/')
 
     def post(self,request):
-        print('HIT SIGNUP')
         product_pk = request.POST.get('product')
         form = UserCreationForm(request.POST)
         if form.is_valid():

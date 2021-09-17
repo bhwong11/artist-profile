@@ -15,13 +15,6 @@
     </span>
     </div>
 
-    {% comment %}<form action = "{%url 'artwork_create'%}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {{form.as_p}}
-    <input type="submit" value ="submit">
-    
-    </form>{% endcomment %}
     {%if request.user.is_authenticated%}
       {%if request.user.profile.is_client%}
         <a href="{%url 'tag_new'%}">create tag</a>
