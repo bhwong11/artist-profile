@@ -25,7 +25,7 @@ SECRET_KEY = ')qj=f9o6atv(^8tr1ah^%r7i$u@ya^pdiw9^h@=9@so(dmzcf2'
 #SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','https://artist-ransom-bergen.herokuapp.com']
 
