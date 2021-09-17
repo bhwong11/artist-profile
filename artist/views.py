@@ -454,6 +454,7 @@ class ChangeFMACode(View):
 """ 
 Random MFA code generator, 
 takes in no input and will return a 3 to 5 string of number characters
+
 """
 def randomCodeGenerator():
     code = ''
