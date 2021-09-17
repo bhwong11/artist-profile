@@ -2,39 +2,8 @@
 
 {%block title%}artworks{%endblock%}
 {%block content%}
-{% comment %}<style>
-.file-input{
-    background-color:aqua;
-    padding:50px;
-    text-align: center;
-}
-.file-input:hover{
-    background-color:blue;
-}
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown:hover .dropdown-content {display: block;}
-</style>{% endcomment %}
     <h2 class ="artworks_page__title">Artwork</h2>
+    <div class="dropdown_bar">
     <div class="dropdown">
     <div class="dropbtn">Tags</div>
         <div class="dropdown-content">
@@ -43,6 +12,7 @@
         {%endfor%}
         <a href='/artworks'>all</a>
         </div>
+    </div>
     </div>
 
     {% comment %}<form action = "{%url 'artwork_create'%}" method="post" enctype="multipart/form-data">
@@ -92,9 +62,5 @@
     {%endfor%}
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone-amd-module.js" integrity="sha512-4p9OjnfBk18Aavg91853yEZCA7ywJYcZpFt+YB+p+gLNPFIAlt2zMBGzTxREYh+sHFsttK0CTYephWaY7I3Wbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-    const allImages = document.querySelectorAll('img')
-    const allTopContainer = document.querySelectorAll('.artwork_wrapper__top')
-    const allBottomContainer = document.querySelectorAll('.artwork_wrapper__bottom')
-    </script>
+
 {%endblock%}

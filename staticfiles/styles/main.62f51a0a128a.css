@@ -114,12 +114,6 @@ a:hover{
 }
 
 /* drop down tags */
-.dropdown_bar{
-    width:10vw;
-}
-.dropbtn{
-    width:10vw;
-}
 .dropdown {
   position: relative;
   color:var(--main-textwhite-color);

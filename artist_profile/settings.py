@@ -25,9 +25,9 @@ SECRET_KEY = ')qj=f9o6atv(^8tr1ah^%r7i$u@ya^pdiw9^h@=9@so(dmzcf2'
 #SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','https://artist-ransom-bergen.herokuapp.com']
 
 LOGGING = {
     'version': 1,
@@ -196,6 +196,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 from dotenv import load_dotenv
 
 load_dotenv()
