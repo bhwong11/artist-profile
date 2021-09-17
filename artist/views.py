@@ -316,7 +316,6 @@ class LoginView(View):
         password = request.POST.get('password')
         product_pk = request.POST.get('product')
         user = authenticate(request, username=username, password=password)
-        
         if user is not None:
             if user.profile.is_client == True:
                 if user.profile.phone_number == '':

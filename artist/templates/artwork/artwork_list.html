@@ -4,7 +4,7 @@
 {%block content%}
     <h2 class ="artworks_page__title">Artwork</h2>
     <div class="dropdown_bar">
-    <div class="dropdown">
+    <span class="dropdown">
     <span class="dropbtn">Tags</span>
         <div class="dropdown-content">
         {%for tag in tags.all%}
@@ -12,7 +12,7 @@
         {%endfor%}
         <a href='/artworks'>all</a>
         </div>
-    </div>
+    </span>
     </div>
 
     {% comment %}<form action = "{%url 'artwork_create'%}" method="post" enctype="multipart/form-data">
