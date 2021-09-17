@@ -451,6 +451,10 @@ class ChangeFMACode(View):
         request.session['mfa_code'] = randomCodeGenerator()
         return redirect('/mfalogin/')
 
+""" 
+Random MFA code generator, 
+takes in no input and will return a 3 to 5 string of number characters
+"""
 def randomCodeGenerator():
     code = ''
     for i in range(0,3):
