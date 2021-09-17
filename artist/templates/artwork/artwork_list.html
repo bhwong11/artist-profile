@@ -5,7 +5,7 @@
     <h2 class ="artworks_page__title">Artwork</h2>
     <div class="dropdown_bar">
     <div class="dropdown">
-    <div class="dropbtn">Tags</div>
+    <span class="dropbtn">Tags</span>
         <div class="dropdown-content">
         {%for tag in tags.all%}
             <a href='?tag={{tag.pk}}'>{{tag.name}}</a>
