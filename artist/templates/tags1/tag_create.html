@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block title%}
+Create Tag
+{%endblock%}
+
+{%block content%}
+<div class="client_side_form_wrapper">
+    <form class="client_side_form" action="{% url 'tag_new'%}" method="post">
+        <h3>Create A new Tag</h3>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="btn client_side_form_submit" type="submit" value="submit">
+    </form>
+</div>
+{%endblock%}

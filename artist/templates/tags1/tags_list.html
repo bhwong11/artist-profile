@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%block title%}Tags{%endblock%}
+{%block content%}
+<h3 class="tags_page_title">Tags</h3>
+<a class="tags_page_title" href="{% url 'tag_new'%}">Create</a>
+<div class="tag_container">
+<div class="tag_wrapper">
+    {%for tag in object_list%}
+    <hr>
+    <h5>Tag: {{tag.name}}</h5>
+    <a href="{% url 'tag_update' tag.pk%}">Update</a>
+    <a href="{% url 'tag_delete' tag.pk%}">Delete</a>
+    <hr>
+    <h6>Artworks:</h6>
+    <ul class="tags_artworks">
+        {%for artwork in tag.artworks.all%}
+        <li>{{artwork.title}}</li>
+        <a href="{%url 'artwork_update' artwork.pk%}">Update</a>
+        {%endfor%}
+    </ul>
+{%endfor%}
+</div>
+</div>
+{%endblock%}
