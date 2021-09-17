@@ -128,12 +128,12 @@ class ArtworksDeleteView(DeleteView):
 
 class TagsListView(ListView):
     model = Tag
-    template_name = 'tags/tags_list.html'
+    template_name = 'tags1/tags_list.html'
 
 class TagsCreateView(CreateView):
     model = Tag
     fields = ['name']
-    template_name = 'tags/tag_create.html'
+    template_name = 'tags1/tag_create.html'
     success_url = '/tags/'
 
     #check if user is client will send to hompage if not
@@ -146,7 +146,7 @@ class TagsCreateView(CreateView):
 class TagsUpdateView(UpdateView):
     model = Tag
     fields = ['name']
-    template_name = 'tags/tag_update.html'
+    template_name = 'tags1/tag_update.html'
     success_url = '/tags/'
 
     #check if user is client will send to hompage if not
@@ -158,7 +158,7 @@ class TagsUpdateView(UpdateView):
 
 class TagsDeleteView(DeleteView):
     model = Tag
-    template_name = 'tags/tag_delete_confirmation.html'
+    template_name = 'tags1/tag_delete_confirmation.html'
     success_url = '/tags/'
 
     #check if user is client will send to hompage if not
