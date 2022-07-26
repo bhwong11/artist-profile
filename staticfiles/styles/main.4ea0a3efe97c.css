@@ -454,7 +454,7 @@ input.auth_form_submit{
 .contact_page__text{
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 10px;
 }
 .social_icons{
